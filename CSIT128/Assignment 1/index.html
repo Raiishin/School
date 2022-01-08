@@ -13,9 +13,18 @@
 
 <html>
     <head>
+        <script type="text/javascript" src="//translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script>
         <script type="text/javascript">
+
+            function validate(field) {
+                if (field === 'name') {
+                    // make sure name contains no special character but numbers are allowed
+                    // cannot be empty
+                }
+            }
             function getCurrentDateTime() {
                 const dateObj = new Date();
+
                 const days = ["Sunday","Monday","Tuesday","Wednesday","Thursday","Friday","Saturday"];
                 const months = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"];
                 
@@ -32,30 +41,22 @@
             }
 
             function checkEmpty() {
-                const findInput = document.getElementById("find")
+                const findInput = document.getElementById("find");
 
-                if (!findInput.innerText) {
-                    document.getElementById("replace").disabled = false;
-                } else {
-                    document.getElementById("replace").disabled = true;
-                }
+                if (!findInput.innerText) document.getElementById("replace").disabled = false;
+                else document.getElementById("replace").disabled = true;
             }
 
             function findAndReplace() {
-                const message = document.getElementById("message")
-                const findInput = document.getElementById("find")
-                const replaceInput = document.getElementById("replace")
-            }
+                const findInput = document.getElementById("find").value;
+                const replaceInput = document.getElementById("replace").value;
+                const message = document.getElementById("message").value
 
-            function translate() {
-                new google.translate.TranslateElement({pageLanguage: 'en',includedLanguage:'cn,jp,kr'}, 'google_translate_element');
-            }
-
-            function reset() {
-
+                document.getElementById("message").value = message.replace(findInput, replaceInput);
             }
         </script>
     </head>
+
     <body>
         <div id="Part1">
             <h1>Part 1:</h1>
@@ -208,7 +209,7 @@
         </div>
         <div id="Part4">
             <h1>Part 4:</h1>
-            <form>
+            <form action="https://translate.google.com" method="get">
                 <label for="name">Name:</label>
                 <input type="text" id="name">
                 <br>
@@ -226,7 +227,7 @@
                 <br>
 
                 <label for="message">Message:</label>
-                <textarea rows="4" cols="25" id="message">Default</textarea>
+                <textarea rows="4" cols="25" name="text">Default</textarea>
                 <br>
 
                 <label for="find">Find:</label>
@@ -237,27 +238,27 @@
                 <input type="text" id="replace" disabled>
                 <br>
 
-                <button onclick="findAndReplace()">Find and Replace</button>
+                <button type="button" onclick="findAndReplace()">Find and Replace</button>
                 <br>
 
-                <label for="sourceLanguages">Source Languages:</label>
-                <select id="sourceLanguages">
-                    <option selected value="English">English</option>
-                    <option value="Malay">Malay</option>
-                    <option value="Japanese">Japanese</option>
-                    <option value="Korean">Korean</option>
+                <label>Source Languages:</label>
+                <select name="sl">
+                    <option selected value="en">English</option>
+                    <option value="ma">Malay</option>
+                    <option value="ja">Japanese</option>
+                    <option value="ko">Korean</option>
                 </select>
                 <br>
 
                 <label>Target Languages:</label>
-                <input type="radio" id="targetLanguageEnglish" name="targetLanguage" value="English">English
-                <input type="radio" id="targetLanguageChinese" name="targetLanguage" value="Chinese">Chinese
-                <input checked type="radio" id="targetLanguageJapanese" name="targetLanguage" value="Japanese">Japanese
-                <input type="radio" id="targetLanguageKorean" name="targetLanguage" value="Korean">Korean
+                <input type="radio" name="tl" value="en">English
+                <input type="radio" name="tl" value="zh-cn">Chinese
+                <input checked type="radio" name="tl" value="ja">Japanese
+                <input type="radio" name="tl" value="ko">Korean
                 <br>
 
-                <button onclick="translate()">Translate</button>
-                <button onclick="reset()">Reset</button>
+                <button type="submit" value="Translate">Translate</button>
+                <button type="reset">Reset</button>
               </form>
         </div>
     </body>
