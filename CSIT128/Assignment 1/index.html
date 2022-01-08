@@ -13,8 +13,47 @@
 
 <html>
     <head>
-        <script>
-            
+        <script type="text/javascript">
+            function getCurrentDateTime() {
+                const dateObj = new Date();
+                const days = ["Sunday","Monday","Tuesday","Wednesday","Thursday","Friday","Saturday"];
+                const months = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"];
+                
+                const time = dateObj.toLocaleString('en-US', { hour: '2-digit', minute: 'numeric', hour12: true });
+                const day = days[dateObj.getDay()];
+                const month = months[dateObj.getMonth()];
+                const date = dateObj.getDate();
+                const year = dateObj.getFullYear().toString().slice(-2);
+
+                const returnText = `${date} ${month} ${year} ${day} ${time}`;
+                console.log (returnText);
+
+                return returnText;
+            }
+
+            function checkEmpty() {
+                const findInput = document.getElementById("find")
+
+                if (!findInput.innerText) {
+                    document.getElementById("replace").disabled = false;
+                } else {
+                    document.getElementById("replace").disabled = true;
+                }
+            }
+
+            function findAndReplace() {
+                const message = document.getElementById("message")
+                const findInput = document.getElementById("find")
+                const replaceInput = document.getElementById("replace")
+            }
+
+            function translate() {
+                new google.translate.TranslateElement({pageLanguage: 'en',includedLanguage:'cn,jp,kr'}, 'google_translate_element');
+            }
+
+            function reset() {
+
+            }
         </script>
     </head>
     <body>
@@ -110,7 +149,7 @@
                     </code>
                 </pre>
               </div>
-
+              <hr>
         </div>
         <div id="Part3">
             <h1>Part 3:University policies and services</h1>
@@ -180,8 +219,8 @@
 
                 <label for="date">Current Date:</label>
                 <text id="name">
-                    <script type="text/javascript"> 
-                        document.write(new Date().toLocaleDateString()); 
+                    <script type="text/javascript">
+                        document.write(getCurrentDateTime());
                     </script>
                 </text>
                 <br>
@@ -196,28 +235,9 @@
 
                 <label for="replace">Replace:</label>
                 <input type="text" id="replace" disabled>
-                <script type="text/javascript">
-                    function checkEmpty() {
-                        const findInput = document.getElementById("find")
-
-                        if (!findInput.innerText) {
-                            document.getElementById("replace").disabled = false;
-                        } else {
-                            document.getElementById("replace").disabled = true;
-                        }
-                    }
-                </script>
                 <br>
 
                 <button onclick="findAndReplace()">Find and Replace</button>
-                <script type="text/javascript">
-                    function findAndReplace() {
-                        const message = document.getElementById("message")
-                        const findInput = document.getElementById("find")
-                        const replaceInput = document.getElementById("replace")
-                        
-                    }
-                </script>
                 <br>
 
                 <label for="sourceLanguages">Source Languages:</label>
@@ -237,18 +257,7 @@
                 <br>
 
                 <button onclick="translate()">Translate</button>
-                <script type="text/javascript" src="//translate.google.com/translate_a/element.js?cb=googleTranslateElementInit">
-                    function translate() {
-                        new google.translate.TranslateElement({pageLanguage: 'en',includedLanguage:'cn,jp,kr'}, 'google_translate_element');
-                    }
-                </script>
-
                 <button onclick="reset()">Reset</button>
-                <script type="text/javascript">
-                    function reset() {
-                        
-                    }
-                </script>
               </form>
         </div>
     </body>
