@@ -43,9 +43,9 @@
             function findAndReplace() {
                 const findInput = document.getElementById("find").value;
                 const replaceInput = document.getElementById("replace").value;
-                const message = document.getElementById("message").value
+                const message = document.getElementById("message").value;
 
-                document.getElementById("message").value = message.replace(findInput, replaceInput);
+                document.getElementById("message").value = message.replaceAll(findInput, replaceInput);
             }
         </script>
     </head>
@@ -59,7 +59,7 @@
                     <th>Group Tx</th>
                 </tr>
                 <tr>
-                    <td rowspan="2"> Student Number / Name / Email </td>
+                    <td rowspan="3"> Student Number / Name / Email </td>
                     <td> 7573935 </td>
                     <td> Gavin Tan </td>
                     <td> jygt662@uowmail.edu.au </td>
@@ -70,9 +70,9 @@
                     <td> Email 2 </td>
                 </tr>
                 <tr>
-                    <td> UOW ID 2 </td>
-                    <td> Name 2 </td>
-                    <td> Email 2 </td>
+                    <td> UOW ID 3 </td>
+                    <td> Name 3 </td>
+                    <td> Email 3 </td>
                 </tr>
             </table>
         </div>
@@ -83,11 +83,11 @@
                 <li> <a href='#C#'>C#</a> </li>
                 <li> <a href='#Python'>Python</a> </li>
                 <li> <a href='#HTML'>HTML</a> </li>
-              </ul>
+            </ul>
 
-              <hr>
-              <h2 id="C++">C++</h2>
-              <div style="display: flex;">
+            <hr>
+            <h2 id="C++">C++</h2>
+            <div style="display: flex;">
                 <img src="assets/CPP-Language.png">
                 <pre>
                     <code>
@@ -97,11 +97,11 @@
     }
                     </code>
                 </pre>
-              </div>
-              <hr>
+            </div>
+            <hr>
 
-              <h2 id="C#">C#</h2>
-              <div style="display: flex;">
+            <h2 id="C#">C#</h2>
+            <div style="display: flex;">
                 <img src="assets/CS-Language.png">
                 <pre>
                     <code>
@@ -116,11 +116,11 @@
     }
                     </code>
                 </pre>
-              </div>
-              <hr>
+            </div>
+            <hr>
 
-              <h2 id="Python">Python</h2>
-              <div style="display: flex;">
+            <h2 id="Python">Python</h2>
+            <div style="display: flex;">
                 <img src="assets/Python-Language.jpg">
                 <pre>
                     <code>
@@ -129,11 +129,11 @@
     print(&quot;Hello World!&quot;)
                     </code>
                 </pre>
-              </div>
-              <hr>
+            </div>
+            <hr>
 
-              <h2 id="HTML">HTML</h2>
-              <div style="display: flex;">
+            <h2 id="HTML">HTML</h2>
+            <div style="display: flex;">
                 <img src="assets/html-Language.png">
                 <pre>
                     <code>
@@ -147,9 +147,10 @@
     &lt;/html&gt;
                     </code>
                 </pre>
-              </div>
-              <hr>
+            </div>
+            <hr>
         </div>
+
         <div id="Part3">
             <h1>Part 3:University policies and services</h1>
             <dl>
@@ -193,7 +194,6 @@
                             <br>mperez@uow.edu.au
                         </td>
                     </table>
-
                 </dd>
             
                 <dt>DISABILITY SERVICES</dt>
@@ -203,8 +203,8 @@
                     Please click <a href="https://www.uow.edu.au/student/support-services/disability/">here</a> to read more about Disability Services.
                 </dd>
             </dl>
-            
         </div>
+
         <div id="Part4">
             <h1>Part 4:</h1>
             <form action="https://translate.google.com" method="get">
@@ -225,7 +225,7 @@
                 <br>
 
                 <label for="message">Message:</label>
-                <textarea rows="4" cols="25" name="text" required>Default</textarea>
+                <textarea rows="4" cols="25" name="text" id="message" required>Default</textarea>
                 <br>
 
                 <label for="find">Find:</label>
