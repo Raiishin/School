@@ -1,0 +1,249 @@
+<style>
+    tr,td,th {
+        border: solid;
+        border-width: 1px;
+    }
+</style>
+
+<html>
+    <body>
+        <div id="Part1">
+            <h1>Part 1:</h1>
+            <table>
+                <tr>
+                    <th colspan="3">CSIT128: Assignment 1</th>
+                    <th>Group Tx</th>
+                </tr>
+                <tr>
+                    <td rowspan="2">
+                        Student Number /
+                        Name / Email
+                    </td>
+                    <td>
+                        UOW ID 1
+                    </td>
+                    <td>
+                        Name 1
+                    </td>
+                    <td>
+                        Email 1
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        UOW ID 2
+                    </td>
+                    <td>
+                        Name 2
+                    </td>
+                    <td>
+                        Email 2
+                    </td>
+                </tr>
+            </table>
+        </div>
+        <div id="Part2">
+            <h1>Part2: Hello World program in different languages</h1>
+            <ul>
+                <li><a href='#C++'>C++</a></li>
+                <li><a href='#C#'>C#</a></li>
+                <li><a href='#Python'>Python</a></li>
+                <li><a href='#HTML'>HTML</a></li>
+              </ul>
+
+              <h2 id="C++">C++</h2>
+              <div style="display: flex;">
+                <img src="assets/CPP-Language.png">
+                <pre>
+                    <code>
+    #include &lt;iostream&gt;
+    void main( ) {
+        cout &lt;&lt; &quot;Hello World!&quot; &lt;&lt; endl;
+    }
+                    </code>
+                </pre>
+              </div>
+
+              <h2 id="C#">C#</h2>
+              <div style="display: flex;">
+                <img src="assets/CS-Language.png">
+                <pre>
+                    <code>
+    using System;
+
+    class Program
+    {
+        static void Main()
+        {
+            Console.WriteLine(&quot;Hello, World!&quot;);
+        }
+    }
+                    </code>
+                </pre>
+              </div>
+
+              <h2 id="Python">Python</h2>
+              <div style="display: flex;">
+                <img src="assets/Python-Language.jpg">
+                <pre>
+                    <code>
+    # Hello World program in Python
+
+    print(&quot;Hello World!&quot;)
+                    </code>
+                </pre>
+              </div>
+
+              <h2 id="HTML">HTML</h2>
+              <div style="display: flex;">
+                <img src="assets/html-Language.png">
+                <pre>
+                    <code>
+    &lt;html&gt;
+    &lt;head&gt;
+    &lt;title&gt;Hello&lt;/title&gt;
+    &lt;/head&gt;
+    &lt;body&gt;
+    Hello World!
+    &lt;/body&gt;
+    &lt;/html&gt;
+                    </code>
+                </pre>
+              </div>
+        </div>
+        <div id="Part3">
+            <h1>Part 3:University policies and services</h1>
+
+            <h2>PLAGIARISM</h2>
+            <p>
+                Plagiarism is treated seriously. If we suspect any work is copied, all students involved are likely to receive zero for the entire assignment. Plagiarism has led to students being expelled from the University.
+                <br>
+                Please click <a href="https://www.uow.edu.au/student/support-services/learning-development/plagiarism/">here</a> to read more about Plagiarism.
+            </p>
+
+            <h2>ACADEMIC CONSIDERATION</h2>
+            <p>
+                We know that life isn't perfect and there may be a time when you can't hand in an assignment on time, or make it to class or an exam. If you find yourself in a situation like this, you may be eligible for Academic Consideration. Academic Consideration is designed to help students when they are sick, injured, or where a serious, unplanned situation has occurred that has affected their ability to study.
+                <br>
+                Please click <a href="https://www.uow.edu.au/student/admin/academic-consideration/portal/">here</a> to read more about Academic Consideration.
+            </p>
+
+            <h2>STUDENT SUPPORT ADVISERS</h2>
+            <p>
+                If you have an issue or a problem that is affecting your study, then the Student Support Advisers may be able to help. There are Student Support Advisers available to assist students who are studying at all UOW Campuses and in all UOW Faculties.
+                <br>
+                Please click <a href="https://www.uow.edu.au/student/support-services/advisers/">here</a> to read more about Student Support Advisers.
+            </p>
+
+            <text>Student Support Adviser contact details for Faculty of Engineering and Information Sciences:</text>
+            <table>
+                <td>
+                    <b>Ann-Maree Smith</b>
+                    <br>Bld 40:133, Wollongong
+                    <br>Campus
+                    <br>(02) 4221 4714
+                    <br>ams@uow.edu.au
+                </td>
+                <td>
+                    <b>Mitz Perez</b>
+                    <br>Bld 4:105, Wollongong
+                    <br>Campus
+                    <br>(02) 4221 3833
+                    <br>Mon-Fri
+                    <br>mperez@uow.edu.au
+                </td>
+            </table>
+
+            <h2>DISABILITY SERVICES</h2>
+            <p>
+                Disability Services provide advice and support for students with a disability or health condition. Our aim is to ensure students with a disability realise their full academic potential. We also provide support for those who are the primary carers for those with a medical condition or disability.
+                <br>
+                Please click <a href="https://www.uow.edu.au/student/support-services/disability/">here</a> to read more about Disability Services.
+            </p>
+        </div>
+        <div id="Part4">
+            <h1>Part 4:</h1>
+            <form>
+                <label for="name">Name:</label>
+                <input type="text" id="name">
+                <br>
+
+                <label for="mCode">Module Code:</label>
+                <input type="text" id="mCode">
+                <br>
+
+                <label for="date">Current Date:</label>
+                <text id="name">
+                    <script type="text/javascript"> 
+                        document.write(new Date().toLocaleDateString()); 
+                    </script>
+                </text>
+                <br>
+
+                <label for="message">Message:</label>
+                <textarea rows="4" cols="25" id="message">Default</textarea>
+                <br>
+
+                <label for="find">Find:</label>
+                <input type="search" id="find" oninput="checkEmpty()">
+                <br>
+
+                <label for="replace">Replace:</label>
+                <input type="text" id="replace" disabled>
+                <script type="text/javascript">
+                    function checkEmpty() {
+                        const findInput = document.getElementById("find")
+
+                        if (!findInput.innerText) {
+                            document.getElementById("replace").disabled = false;
+                        } else {
+                            document.getElementById("replace").disabled = true;
+                        }
+                    }
+                </script>
+                <br>
+
+                <button onclick="findAndReplace()">Find and Replace</button>
+                <script type="text/javascript">
+                    function findAndReplace() {
+                        const message = document.getElementById("message")
+                        const findInput = document.getElementById("find")
+                        const replaceInput = document.getElementById("replace")
+                        
+                    }
+                </script>
+                <br>
+
+                <label for="sourceLanguages">Source Languages:</label>
+                <select id="sourceLanguages">
+                    <option selected value="English">English</option>
+                    <option value="Malay">Malay</option>
+                    <option value="Japanese">Japanese</option>
+                    <option value="Korean">Korean</option>
+                </select>
+                <br>
+
+                <label>Target Languages:</label>
+                <input type="radio" id="targetLanguageEnglish" name="targetLanguage" value="English">English
+                <input type="radio" id="targetLanguageChinese" name="targetLanguage" value="Chinese">Chinese
+                <input checked type="radio" id="targetLanguageJapanese" name="targetLanguage" value="Japanese">Japanese
+                <input type="radio" id="targetLanguageKorean" name="targetLanguage" value="Korean">Korean
+                <br>
+
+                <button onclick="translate()">Translate</button>
+                <script type="text/javascript" src="//translate.google.com/translate_a/element.js?cb=googleTranslateElementInit">
+                    function translate() {
+                        new google.translate.TranslateElement({pageLanguage: 'en',includedLanguage:'cn,jp,kr'}, 'google_translate_element');
+                    }
+                </script>
+
+                <button onclick="reset()">Reset</button>
+                <script type="text/javascript">
+                    function reset() {
+                        
+                    }
+                </script>
+              </form>
+        </div>
+    </body>
+</html>
