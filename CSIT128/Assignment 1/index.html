@@ -9,6 +9,11 @@
     dt {
         padding-top: 20px;
     }
+
+    #part3 {
+        inline-size: 750px; 
+        overflow: hidden;
+    }
 </style>
 
 <html>
@@ -208,13 +213,14 @@
         <div id="Part4">
             <h1>Part 4:</h1>
             <form action="https://translate.google.com" method="get">
-                <label for="name">Name:</label>
-                <input type="text" id="name" pattern="^[\w]{1,}$" required>
-                <br>
-
-                <label for="moduleCode">Module Code:</label>
-                <input type="text" id="moduleCode" pattern="^[a-z]{4}[0-9]{3}$">
-                <br>
+                <div style="display: flex; ">
+                    <label for="name">Name:</label>
+                    <input type="text" id="name" pattern="^[\w]{1,}$" required>
+    
+                    <label style="padding-left: 15px;" for="moduleCode">Module Code:</label>
+                    <input type="text" id="moduleCode" pattern="^[a-z]{4}[0-9]{3}$">
+                    <br>
+                </div>
 
                 <label for="date">Current Date:</label>
                 <text id="name">
@@ -223,19 +229,21 @@
                     </script>
                 </text>
                 <br>
-
+                
                 <label for="message">Message:</label>
                 <textarea rows="4" cols="25" name="text" id="message" required>Default</textarea>
                 <br>
 
-                <label for="find">Find:</label>
-                <input type="search" id="find" oninput="checkEmpty()">
-                <br>
+                <div style="display: flex; ">
+                    <label for="find">Find:</label>
+                    <input type="search" id="find" oninput="checkEmpty()">
+                    <br>
 
-                <label for="replace">Replace:</label>
-                <input type="text" id="replace" disabled>
-                <br>
-
+                    <label tyle="padding-left: 15px;" for="replace">Replace:</label>
+                    <input type="text" id="replace" disabled>
+                    <br>
+                </div>
+                
                 <button type="button" onclick="findAndReplace()">Find and Replace</button>
                 <br>
 
