@@ -16,7 +16,9 @@
     "url": "https://github.com/Raiishin/School/issues"
   },
   "homepage": "https://github.com/Raiishin/School#readme",
-  "dependencies": {
-    "eslint": "7.19.0"
+  "devDependencies": {
+    "eslint": "^8.6.0",
+    "eslint-config-google": "^0.14.0",
+    "eslint-plugin-react": "^7.28.0"
   }
 }

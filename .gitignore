@@ -16,6 +16,9 @@ jspm_packages/
 .env.test
 .env.production
 
+# Linter
+.vscode
+
 © 2022 GitHub, Inc.
 Terms
 Privacy
