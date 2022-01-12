@@ -3,7 +3,10 @@ name = 'Tan Jun Yin, Gavin'
 # (2) REPLACE THIS STRING VARIABLE WITH YOUR UOW ID in string type
 student_num = '7573935'
 subject_code = 'CSIT110'
-fav_cartoon = 'asdas'  # (3) let me get to know you!
+# (3) let me get to know you!
+fav_cartoon = 'Crayon Shin-chan'
+
+#========== insert solution here===========#
 
 
 def x100(num):  # Question 1 Solution:
@@ -15,11 +18,11 @@ def get_type(var):  # Question 2 Solution:
 
 
 def get_equation():  # Question 3 Solution:
-    num1 = int(input("Enter first number: "))
-    num2 = int(input("Enter second number: "))
+    firstNum = int(input("Enter first number: "))
+    secondNum = int(input("Enter second number: "))
 
-    returnNum = num1+num2
-    returnStr = "%d + %s" % (num1, num2)
+    returnNum = firstNum + secondNum
+    returnStr = f"{firstNum} + {secondNum}"
 
     return returnNum, returnStr
 
@@ -31,7 +34,9 @@ def to_bool(num):  # Question 4 Solution:
 def format_price(num):  # Question 5 Solution:
     roundoff = "{:.2f}".format(num)
     price = f"${roundoff}"
+
     print(price)
+
     return price
 
 
@@ -53,8 +58,10 @@ def main():  # DO NOT EDIT THESE TWO LINES.
 
     boolNum = to_bool(-1)
     print(boolNum)
+
     boolNum2 = to_bool(3123123)
     print(boolNum2)
+
     boolNum3 = to_bool(0)
     print(boolNum3)
 
