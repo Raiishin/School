@@ -15,4 +15,6 @@ Message Headings should be strictly limited to:
 - Incomplete
 - Completed 
 - Refactor
-- Restructure
+- Added
+- Updated
+- Removed
