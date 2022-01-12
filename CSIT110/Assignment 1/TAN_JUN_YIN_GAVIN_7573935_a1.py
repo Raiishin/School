@@ -9,11 +9,11 @@ fav_cartoon = 'Crayon Shin-chan'
 #========== insert solution here===========#
 
 
-def x100(num):  # Question 1 Solution:
-    return float(num * 100)
+def x100(num: float):  # Question 1 Solution:
+    return num * 100
 
 
-def get_type(var):  # Question 2 Solution:
+def get_type(var: any):  # Question 2 Solution:
     return type(var)
 
 
@@ -27,11 +27,11 @@ def get_equation():  # Question 3 Solution:
     return returnNum, returnStr
 
 
-def to_bool(num):  # Question 4 Solution:
+def to_bool(num: int):  # Question 4 Solution:
     return bool(num)
 
 
-def format_price(num):  # Question 5 Solution:
+def format_price(num: int):  # Question 5 Solution:
     roundoff = "{:.2f}".format(num)
     price = f"${roundoff}"
 
@@ -56,14 +56,14 @@ def main():  # DO NOT EDIT THESE TWO LINES.
     print(x)
     print(y)
 
-    boolNum = to_bool(-1)
-    print(boolNum)
+    numToBool = to_bool(-1)
+    print(numToBool)
 
-    boolNum2 = to_bool(3123123)
-    print(boolNum2)
+    numToBool2 = to_bool(3123123)
+    print(numToBool2)
 
-    boolNum3 = to_bool(0)
-    print(boolNum3)
+    numToBool3 = to_bool(0)
+    print(numToBool3)
 
     price = format_price(1.234)
     print(price)
