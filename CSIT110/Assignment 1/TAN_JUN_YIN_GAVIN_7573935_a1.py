@@ -9,15 +9,15 @@ fav_cartoon = 'Crayon Shin-chan'
 #========== insert solution here===========#
 
 
-def x100(num: float):  # Question 1 Solution:
+def x100(num: float):  # Question 1 Solution
     return num * 100
 
 
-def get_type(var: any):  # Question 2 Solution:
+def get_type(var: any):  # Question 2 Solution
     return type(var)
 
 
-def get_equation():  # Question 3 Solution:
+def get_equation():  # Question 3 Solution
     firstNum = int(input("Enter first number: "))
     secondNum = int(input("Enter second number: "))
 
@@ -30,11 +30,11 @@ def get_equation():  # Question 3 Solution:
     return returnNum, returnStr
 
 
-def to_bool(num: int):  # Question 4 Solution:
+def to_bool(num: int):  # Question 4 Solution
     return bool(num)
 
 
-def format_price(num: int):  # Question 5 Solution:
+def format_price(num: int):  # Question 5 Solution
     roundoff = "{:.2f}".format(num)  # Round off the number to 2 decimal places
     price = f"${roundoff}"
 
@@ -44,20 +44,26 @@ def format_price(num: int):  # Question 5 Solution:
 
 
 def run_tests():
-    # Test Code
+    # Question 1
     x = x100(43.1)
     print(x)
     x = x100(123.567)
     print(x)
+    x = x100(-0.213123)
+    print(x)
 
+    # Question 2
     print(get_type(123))
     print(get_type("hohoho"))
     print(get_type(True))
+    print(get_type(1.234))
 
+    # Question 3
     x, y = get_equation()
     print(x)
     print(y)
 
+    # Question 4
     x = to_bool(-123)
     y = to_bool(0)
     z = to_bool(684.43)
@@ -65,6 +71,7 @@ def run_tests():
     print(y)
     print(z)
 
+    # Question 5
     x = format_price(2.3)
     print(x)
     x = format_price(5.15)
