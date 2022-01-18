@@ -3,17 +3,28 @@
         border: solid;
         border-width: 1px;
     }
+
     th {
         background-color: #deeaf6;
     }
+
     dt {
         padding-top: 20px;
+    }
+
+    button {
+        margin: 10px;
+    }
+
+    .errorMessage {
+        color: red;
     }
 
     #part3 {
         inline-size: 750px; 
         overflow: hidden;
     }
+
 </style>
 
 <html>
@@ -51,6 +62,39 @@
                 const message = document.getElementById("message").value;
 
                 document.getElementById("message").value = message.replaceAll(findInput, replaceInput);
+            }
+
+            function validateForm() {
+                document.getElementById("nameError").innerHTML = "";
+                document.getElementById("moduleCodeError").innerHTML = "";
+
+                const name = document.getElementById("name").value;
+
+                if (name === null || name === "" ) {
+                    document.getElementById("nameError").innerHTML = "Name cannot be empty";
+                    return false;
+                } else if (/^[\w]{1,}$/.test(name) === false){
+                    document.getElementById("nameError").innerHTML = "Name cannot contain special characters";
+                    return false;
+                } else {
+                    document.getElementById("nameError").innerHTML = "";
+                }
+
+                const moduleCode = document.getElementById("moduleCode").value;
+
+                if (moduleCode !== null && moduleCode !== "") {
+                    if (moduleCode.length !== 7 ) {
+                        document.getElementById("moduleCodeError").innerHTML = "Module Code must contain 7 characters";
+                        return false;
+                    } else if (/^[a-z]{4}[1-9]{2}[0-9]{1}$/.test(moduleCode) === false){
+                        document.getElementById("moduleCodeError").innerHTML = "Module Code must start with 4 lower case alphabets followed by 3 digits";
+                        return false;
+                    }
+                } else {
+                    document.getElementById("moduleCodeError").innerHTML = "";
+                }
+
+                return true;
             }
         </script>
     </head>
@@ -212,15 +256,16 @@
 
         <div id="Part4">
             <h1>Part 4:</h1>
-            <form action="https://translate.google.com" method="get">
-                <div style="display: flex; ">
-                    <label for="name">Name:</label>
-                    <input type="text" id="name" pattern="^[\w]{1,}$" required>
-    
-                    <label style="padding-left: 15px;" for="moduleCode">Module Code:</label>
-                    <input type="text" id="moduleCode" pattern="^[a-z]{4}[0-9]{3}$">
-                    <br>
-                </div>
+            <form action="https://translate.google.com" method="get" onsubmit="return validateForm()">
+                <label for="name">Name:</label>
+                <input type="text" id="name">
+                <span class="errorMessage" id="nameError"></span>
+                <br>
+
+                <label for="moduleCode">Module Code:</label>
+                <input type="text" id="moduleCode">
+                <span class="errorMessage" id="moduleCodeError"></span>
+                <br>
 
                 <label for="date">Current Date:</label>
                 <text id="name">
@@ -234,15 +279,13 @@
                 <textarea rows="4" cols="25" name="text" id="message" required>Default</textarea>
                 <br>
 
-                <div style="display: flex; ">
-                    <label for="find">Find:</label>
-                    <input type="search" id="find" oninput="checkEmpty()">
-                    <br>
+                <label for="find">Find:</label>
+                <input type="search" id="find" oninput="checkEmpty()">
+                <br>
 
-                    <label tyle="padding-left: 15px;" for="replace">Replace:</label>
-                    <input type="text" id="replace" disabled>
-                    <br>
-                </div>
+                <label for="replace">Replace:</label>
+                <input type="text" id="replace" disabled>
+                <br>
                 
                 <button type="button" onclick="findAndReplace()">Find and Replace</button>
                 <br>
