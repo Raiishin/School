@@ -1,34 +1,33 @@
-<style>
-    tr, td, th {
-        border: solid;
-        border-width: 1px;
-    }
-
-    th {
-        background-color: #deeaf6;
-    }
-
-    dt {
-        padding-top: 20px;
-    }
-
-    button {
-        margin: 10px;
-    }
-
-    .errorMessage {
-        color: red;
-    }
-
-    #part3 {
-        inline-size: 750px; 
-        overflow: hidden;
-    }
-
-</style>
-
 <html>
     <head>
+        <style>
+            tr, td, th, table{
+                border: solid;
+                border-width: 1px;
+            }
+        
+            th {
+                background-color: #deeaf6;
+            }
+        
+            dt {
+                padding-top: 20px;
+            }
+        
+            button {
+                margin: 10px;
+            }
+        
+            .errorMessage {
+                color: red;
+            }
+        
+            #part3 {
+                inline-size: 750px; 
+                overflow: hidden;
+            }
+        </style>
+
         <script type="text/javascript" src="//translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script>
         <script type="text/javascript">
             function getCurrentDateTime() {
@@ -87,7 +86,7 @@
                         document.getElementById("moduleCodeError").innerHTML = "Module Code must contain 7 characters";
                         return false;
                     } else if (/^[a-z]{4}[1-9]{2}[0-9]{1}$/.test(moduleCode) === false){
-                        document.getElementById("moduleCodeError").innerHTML = "Module Code must start with 4 lower case alphabets followed by 3 digits";
+                        document.getElementById("moduleCodeError").innerHTML = "Module Code must start with 4 lower case alphabets followed by 3 digits, where the first 2 digits cannot be 0";
                         return false;
                     }
                 } else {
@@ -105,23 +104,23 @@
             <table>
                 <tr>
                     <th colspan="3">CSIT128: Assignment 1</th>
-                    <th>Group Tx</th>
+                    <th>Just want to pass</th>
                 </tr>
                 <tr>
                     <td rowspan="3"> Student Number / Name / Email </td>
                     <td> 7573935 </td>
-                    <td> Gavin Tan </td>
-                    <td> jygt662@uowmail.edu.au </td>
+                    <td> Tan Jun Yin Gavin </td>
+                    <td> jygtan002@mymail.sim.edu.sg </td>
                 </tr>
                 <tr>
-                    <td> UOW ID 2 </td>
-                    <td> Name 2 </td>
-                    <td> Email 2 </td>
+                    <td> 7538832 </td>
+                    <td> Antony Chen Zhichao  </td>
+                    <td> azchen001@mymail.sim.edu.sg </td>
                 </tr>
                 <tr>
-                    <td> UOW ID 3 </td>
-                    <td> Name 3 </td>
-                    <td> Email 3 </td>
+                    <td> 7433700 </td>
+                    <td> Nicholas Ng Kai Zhen </td>
+                    <td> nkzng001@mymail.sim.edu.sg </td>
                 </tr>
             </table>
         </div>
