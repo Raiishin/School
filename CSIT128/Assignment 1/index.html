@@ -58,7 +58,7 @@
             function findAndReplace() {
                 const findInput = document.getElementById("find").value;
                 const replaceInput = document.getElementById("replace").value;
-                const message = document.getElementById("message").value;
+                const message = document.getElementById("message").value.toLowerCase();
 
                 document.getElementById("message").value = message.replaceAll(findInput, replaceInput);
             }
@@ -124,6 +124,7 @@
                 </tr>
             </table>
         </div>
+
         <div id="Part2">
             <h1>Part 2: Hello World program in different languages</h1>
             <ul>
