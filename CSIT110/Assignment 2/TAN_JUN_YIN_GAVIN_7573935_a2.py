@@ -1,9 +1,16 @@
+# (1) REPLACE THE STRING VARIABLE WITH YOUR NAME in string type
 name = 'Tan Jun Yin, Gavin'
-student_num = '7573935'  # Student number
+# (2) REPLACE THIS STRING VARIABLE WITH YOUR UOW ID in string type
+student_num = '7573935'
 subject_code = 'CSIT110'
+# (3) let me get to know you!
+comfort_food = 'Cake'
+
+#========== insert solution here===========#
 
 
 def question_1():
+
     UPPERBOUND = int(input('Enter upper bound: '))
     GAP = int(input('Enter gap: '))
 
@@ -36,6 +43,7 @@ def question_1():
 
 
 def question_2():
+
     AGE = int(input('Enter current age: '))
     oa = int(input('Enter current amount in OA: '))
     sa = int(input('Enter current amount in SA: '))
@@ -142,6 +150,7 @@ def question_3():
 
 
 def question_4():
+
     returnString = []
 
     def cleanString(dirty):
@@ -176,7 +185,12 @@ def question_4():
     return listToStr
 
 
-def main():
+def main():  # DO NOT EDIT THESE TWO LINES.
+
+    print("Assignment2")  # DO NOT EDIT THESE TWO LINES.
+
+    # you can call your functions here to test that it works.
+    # you do not have to comment your own test code
 
     # Note: print() was added for improved readability
     question_1()
@@ -188,5 +202,5 @@ def main():
     print(question_4())
 
 
-if __name__ == '__main__':
+if __name__ == '__main__':  # DO NOT EDIT THESE TWO LINES.
     main()
