@@ -34,8 +34,8 @@ class Catalogue:
 
         for channel, price in cls.tv_channels.items():
             print(f'{channel:<22}', end=' ')
-            formattedPrice = f'${price}'
-            print(f'{formattedPrice:>9}')
+            formatted_price = f'${price}'
+            print(f'{formatted_price:>9}')
 
     @classmethod
     def get_subscription(cls):
@@ -61,29 +61,29 @@ class Customer:
 
 
 def generate_qns_from_list(qns: list):
-    returnList = []
+    return_list = []
 
     for qn in qns:
         if len(qn) >= 2:  # Skip the lists that contain less than 2 integers
-            listToStr = ' + '.join(map(str, qn))
-            returnList.append({
-                "qns": listToStr, "ans": sum(qn)
+            list_to_str = ' + '.join(map(str, qn))
+            return_list.append({
+                "qns": list_to_str, "ans": sum(qn)
             })
 
-    return returnList
+    return return_list
 
 
 def get_id_checksum(id: str):
-    checksumList = [2, 7, 6, 5, 4, 3, 2]
-    strToList = list(id)
-    totalSum = 0
+    checksum_list = [2, 7, 6, 5, 4, 3, 2]
+    str_to_list = list(id)
+    total_sum = 0
 
-    for num1, num2 in zip(checksumList, strToList):
-        totalSum = totalSum + (num1 * int(num2))
+    for num1, num2 in zip(checksum_list, str_to_list):
+        total_sum = total_sum + (num1 * int(num2))
 
-    d = totalSum % 11
+    d = total_sum % 11
 
-    checkDigit = {
+    check_digit = {
         10: "A",
         9: "B",
         8: "C",
@@ -97,51 +97,51 @@ def get_id_checksum(id: str):
         0: "J"
     }
 
-    return checkDigit[d]
+    return check_digit[d]
 
 
 def get_car_plate_checksum(carplate: str):
-    letterDict = dict(zip(string.ascii_uppercase, range(1, 27)))
-    checksumList = [9, 4, 5, 4, 3, 2]
-    strToList = list(carplate)
+    letter_dict = dict(zip(string.ascii_uppercase, range(1, 27)))
+    checksum_list = [9, 4, 5, 4, 3, 2]
+    str_to_list = list(carplate)
 
-    alphaCount = 0
-    numCount = 0
+    alpha_count = 0
+    num_count = 0
     for char in carplate:
         try:
             if char.isalpha():
-                alphaCount += 1
+                alpha_count += 1
             else:
                 raise ValueError
         except ValueError:
-            numCount += 1
+            num_count += 1
 
     # Fill in placeholder for letters
-    if alphaCount > 2:
-        strToList.pop(0)
-    elif alphaCount < 2:
-        strToList.insert(0, "0")
+    if alpha_count > 2:
+        str_to_list.pop(0)
+    elif alpha_count < 2:
+        str_to_list.insert(0, "0")
 
     # Fill in placeholder for numbers
-    while numCount < 4:
-        strToList.insert(len(strToList)-numCount, "0")
-        numCount += 1
+    while num_count < 4:
+        str_to_list.insert(len(str_to_list)-num_count, "0")
+        num_count += 1
 
     count = 0
     # Replace letters with numbers
-    for letter in strToList:
+    for letter in str_to_list:
         if letter.isalpha():
-            num = str(letterDict.get(letter))
-            strToList[count] = num
+            num = str(letter_dict.get(letter))
+            str_to_list[count] = num
         count += 1
 
-    totalSum = 0
-    for num1, num2 in zip(checksumList, strToList):
-        totalSum = totalSum + (num1 * int(num2))
+    total_sum = 0
+    for num1, num2 in zip(checksum_list, str_to_list):
+        total_sum = total_sum + (num1 * int(num2))
 
-    checkSum = totalSum % 19
+    checksum = total_sum % 19
 
-    checkDigit = {
+    check_digit = {
         0: "A",
         1: "Z",
         2: "Y",
@@ -163,7 +163,7 @@ def get_car_plate_checksum(carplate: str):
         18: "B",
     }
 
-    return checkDigit[checkSum]
+    return check_digit[checksum]
 
 
 def main():  # DO NOT EDIT THESE TWO LINES.
@@ -173,20 +173,20 @@ def main():  # DO NOT EDIT THESE TWO LINES.
     # you can call your functions here to test that it works.
     # you do not have to comment your own test code
 
-    # catalog = Catalogue("123")
-    # catalog.display()
-    # print(catalog.get_subscription())
+    catalog = Catalogue("123")
+    catalog.display()
+    print(catalog.get_subscription())
 
-    # sam = Customer("Sam")
-    # print(sam.subscripton)
+    sam = Customer("Sam")
+    print(sam.subscripton)
 
-    # input_list = [[1, 3, 3], [2, 5, -1], [3, 2], [5],
-    #               [4, 5, 3], [0, 23], [1, 2, 3, 4]]
+    input_list = [[1, 3, 3], [2, 5, -1], [3, 2], [5],
+                  [4, 5, 3], [0, 23], [1, 2, 3, 4], [7, -2, -3, 0, 1], [0, 1, -5]]
 
-    # print(generate_qns_from_list(input_list))
+    print(generate_qns_from_list(input_list))
 
-    # print(get_id_checksum("1234567"))  # 7 || D
-    # print(get_id_checksum("2243212"))  # 6 || E
+    print(get_id_checksum("1234567"))  # 7 || D
+    print(get_id_checksum("2243212"))  # 6 || E
 
     print(get_car_plate_checksum("SBS3229"))  # 8 || P
     print(get_car_plate_checksum("E23"))  # 13 || H
