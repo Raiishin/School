@@ -81,7 +81,7 @@ def get_id_checksum(id: str):
     for num1, num2 in zip(checksum_list, str_to_list):
         total_sum = total_sum + (num1 * int(num2))
 
-    d = total_sum % 11
+    checksum = total_sum % 11
 
     check_digit = {
         10: "A",
@@ -97,7 +97,7 @@ def get_id_checksum(id: str):
         0: "J"
     }
 
-    return check_digit[d]
+    return check_digit[checksum]
 
 
 def get_car_plate_checksum(carplate: str):
