@@ -108,9 +108,12 @@ def get_car_plate_checksum(carplate: str):
     alphaCount = 0
     numCount = 0
     for char in carplate:
-        if char.isalpha():
-            alphaCount += 1
-        else:
+        try:
+            if char.isalpha():
+                alphaCount += 1
+            else:
+                raise ValueError
+        except ValueError:
             numCount += 1
 
     # Fill in placeholder for letters
