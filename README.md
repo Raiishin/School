@@ -13,8 +13,6 @@ Completed :: Python Assignment 1
 
 Message Headings should be strictly limited to:
 - Incomplete
-- Completed 
+- Completed
 - Refactor
 - Added
-- Updated
-- Removed
