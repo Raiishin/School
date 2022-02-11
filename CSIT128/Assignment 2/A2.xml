@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<forecast queryTime="25/01/2020 11:30 PM" queryLocation="Singapore">
+  <weather yyyymmdd="20210811">
+    <year>2021</year>	
+    <month>8</month>
+    <date>11</date>
+    <dayOfWeek>Wed</dayOfWeek> 
+    <overall>Considerable clouds</overall>
+    <overallCode>cloudy</overallCode>
+    <highest>28</highest>
+    <lowest>18</lowest>
+  </weather>
+  <weather yyyymmdd="20211014">
+    <year>2021</year>	
+    <month>10</month>
+    <date>14</date>
+    <dayOfWeek>Thu</dayOfWeek> 
+    <overall>Cloudy with a thunderstorm</overall>
+    <overallCode>thunderstorm</overallCode>
+    <highest>25</highest>
+    <lowest>14</lowest>
+  </weather>
+  <weather yyyymmdd="20211205">
+    <year>2021</year>	
+    <month>12</month>
+    <date>5</date>
+    <dayOfWeek>Sun</dayOfWeek> 
+    <overall>Afternoon shower</overall>
+    <overallCode>rain</overallCode>
+    <highest>23</highest>
+    <lowest>20</lowest>
+  </weather>
+  <weather yyyymmdd="20210809">
+    <year>2021</year>	
+    <month>8</month>
+    <date>09</date>
+    <dayOfWeek>Mon</dayOfWeek> 
+    <overall>A morning shower, then rain</overall>
+    <overallCode>rain</overallCode>
+    <highest>29</highest>
+    <lowest>20</lowest>
+  </weather>
+  <weather yyyymmdd="20210910">
+    <year>2021</year>	
+    <month>9</month>
+    <date>10</date>
+    <dayOfWeek>Fri</dayOfWeek> 
+    <overall>Partly sunny</overall>
+    <overallCode>partlySunny</overallCode>
+    <highest>31</highest>
+    <lowest>22</lowest>
+  </weather>
+  <weather yyyymmdd="20210608">
+    <year>2021</year>	
+    <month>6</month>
+    <date>08</date>
+    <dayOfWeek>Tue</dayOfWeek> 
+    <overall>Plenty of sunshine</overall>
+    <overallCode>sunny</overallCode>
+    <highest>35</highest>
+    <lowest>21</lowest>
+  </weather>
+</forecast>

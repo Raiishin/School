@@ -1,0 +1,146 @@
+<html>
+    <head>
+        <style>
+            .introTableRow td, .introTable, tr, td, th{
+                border: solid;
+                border-width: 1px;
+            }
+        
+            .introTableHeader {
+                background-color: #deeaf6;
+                border: solid;
+                border-width: 1px;
+            }
+            
+            .gameTableRow td{
+                padding: 10px;
+                font-size: 20px;
+                width: 25%;
+                height: 80px;
+                text-align-last: center;
+            }
+
+            .gamebutton {
+                width: 20%;
+                font-size: 20px;
+                height: 50px;
+                /* background-color: lightgreen; */
+            }
+        </style>
+
+        <script>
+            let buttons = [];
+            let timerVariable;
+            let chosenNumber = 0
+            chosenNumber = document.getElementById("selectNumbers").value;
+
+            function startGame() {
+                console.log("Game starting")
+                console.log("Your chosen number is " + chosenNumber);
+
+                buttons = []
+                console.log('Generating random numbers');
+
+                while (buttons.length < 3) {
+                    let randomNumber = Math.floor(Math.random() * 10);
+                    if (buttons.includes(randomNumber) === false) {
+                        buttons.push(randomNumber);
+
+                        document.getElementById("button" + buttons.length).innerHTML = randomNumber;
+                    }
+                }
+            }
+
+            function stopGame() {
+                document.getElementById("score").innerHTML = 0
+            }
+
+            function checkAnswer(buttonNumber) {
+                console.log("Checking answer");
+                score = parseInt(document.getElementById("score").innerHTML);
+
+                if (buttons[buttonNumber] == chosenNumber) document.getElementById("score").innerHTML = score + 5
+                else document.getElementById("score").innerHTML = score - 2
+                
+            }
+
+        </script>
+    </head>
+    <body>
+        <div id="Part1">
+            <h1>Part 1:</h1>
+            <table class="introTable">
+                <tr class="introTableRow">
+                    <th class="introTableHeader" colspan="3">CSIT128: Assignment 1</th>
+                    <th class="introTableHeader">Just want to pass</th>
+                </tr>
+                <tr class="introTableRow">
+                    <td rowspan="3"> Student Number / Name / Email </td>
+                    <td> 7573935 </td>
+                    <td> Tan Jun Yin Gavin </td>
+                    <td> jygtan002@mymail.sim.edu.sg </td>
+                </tr>
+                <tr class="introTableRow">
+                    <td> 7538832 </td>
+                    <td> Antony Chen Zhichao  </td>
+                    <td> azchen001@mymail.sim.edu.sg </td>
+                </tr>
+                <tr class="introTableRow">
+                    <td> 7433700 </td>
+                    <td> Nicholas Ng Kai Zhen </td>
+                    <td> nkzng001@mymail.sim.edu.sg </td>
+                </tr>
+            </table>
+        </div>
+
+        <div id="Part2">
+            <h1>Part 2: Game</h1>
+            <table>
+                <tr>
+                    <th colspan="3" style="background-color: peachpuff;">Part 2: Game</th>
+                </tr>
+                <tr class="gameTableRow">
+                    <td style="text-align-last:left; background-color: lightblue;">Your chosen number:</td>
+                    <td style="background-color: lightblue;">
+                        <select id="selectNumbers" style="background-color: lightblue;">
+                            <script>
+                                let select = document.getElementById('selectNumbers')
+                                
+                                for (let i = 0; i < 10; i++) {
+                                    var opt = document.createElement('option');
+                                    opt.value = i;
+                                    opt.innerHTML = i;
+                                    select.appendChild(opt);
+                                }
+                            </script>
+                          </select>  
+                    </td>
+                    <td style="background-color: palegoldenrod;">
+                        <text>
+                        Current Score: 
+                        </text>
+                        <text id="score" style="color: red">0</text>
+                    </td>
+                </tr>
+                <tr class="gameTableRow">
+                    <td colspan="3" style="background-color: lightgreen;">
+                        <button class="gameButton" style="margin-right:120px" onclick="timerVariable=setInterval(startGame,2000)">Start</button>
+                        <button class="gameButton" onclick="clearInterval(timerVariable); stopGame();">Stop</button>
+                    </td>
+                </tr>
+                <tr class="gameTableRow">
+                    <td onclick="checkAnswer(0)" style="cursor: pointer; color:rgb(153, 153, 59)" id="button1">
+                        Number 1
+                    </td>
+                    <td onclick="checkAnswer(1)" style="cursor: pointer; color:blue;" id="button2">
+                        Number 2
+                    </td>
+                    <td onclick="checkAnswer(2)" style="cursor: pointer; color: darkgreen;" id="button3">
+                        Number 3
+                    </td>
+                </tr>
+
+            </table>
+        </div>
+    </body>
+</html>
