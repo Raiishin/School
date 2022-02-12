@@ -24,19 +24,24 @@
                 width: 20%;
                 font-size: 20px;
                 height: 50px;
-                /* background-color: lightgreen; */
             }
+
         </style>
 
         <script>
+            let hasGameStarted = false
             let buttons = [];
             let timerVariable;
-            let chosenNumber = 0
-            chosenNumber = document.getElementById("selectNumbers").value;
+            let chosenNumber = 0;
 
             function startGame() {
+                if (hasGameStarted === false) {
+                    chosenNumber = document.getElementById("selectNumbers").value;
+                    console.log("Your chosen number is " + chosenNumber);
+                }
+
+                hasGameStarted = true
                 console.log("Game starting")
-                console.log("Your chosen number is " + chosenNumber);
 
                 buttons = []
                 console.log('Generating random numbers');
@@ -53,15 +58,17 @@
 
             function stopGame() {
                 document.getElementById("score").innerHTML = 0
+                hasGameStarted = false
             }
 
             function checkAnswer(buttonNumber) {
-                console.log("Checking answer");
-                score = parseInt(document.getElementById("score").innerHTML);
+                if (hasGameStarted){
+                    console.log("Checking answer");
+                    score = parseInt(document.getElementById("score").innerHTML);
 
-                if (buttons[buttonNumber] == chosenNumber) document.getElementById("score").innerHTML = score + 5
-                else document.getElementById("score").innerHTML = score - 2
-                
+                    if (buttons[buttonNumber] == chosenNumber) document.getElementById("score").innerHTML = score + 5
+                    else document.getElementById("score").innerHTML = score - 2
+                }
             }
 
         </script>
@@ -102,7 +109,7 @@
                 <tr class="gameTableRow">
                     <td style="text-align-last:left; background-color: lightblue;">Your chosen number:</td>
                     <td style="background-color: lightblue;">
-                        <select id="selectNumbers" style="background-color: lightblue;">
+                        <select id="selectNumbers" style="background-color: lightblue; padding:5px;">
                             <script>
                                 let select = document.getElementById('selectNumbers')
                                 
