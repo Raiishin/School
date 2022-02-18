@@ -113,7 +113,7 @@ def get_car_plate_checksum(carplate: str):
                 alpha_count += 1
             else:
                 raise ValueError
-        except ValueError:
+        except ValueError as e:
             num_count += 1
 
     # Fill in placeholder for letters
@@ -177,20 +177,23 @@ def main():  # DO NOT EDIT THESE TWO LINES.
     catalog.display()
     print(catalog.get_subscription())
 
-    sam = Customer("Sam")
+    sam = Customer("Uncle Sam")
     print(sam.subscripton)
 
     input_list = [[1, 3, 3], [2, 5, -1], [3, 2], [5],
-                  [4, 5, 3], [0, 23], [1, 2, 3, 4], [7, -2, -3, 0, 1], [0, 1, -5]]
+                  [4, 5, 3], [0, 23], [1, 2, 3, 4], [7, -2, -3, 0, 1], [0, 1, -5], [7, -12, 100, 99]]
 
     print(generate_qns_from_list(input_list))
 
     print(get_id_checksum("1234567"))  # 7 || D
     print(get_id_checksum("2243212"))  # 6 || E
+    print(get_id_checksum("7849039"))  # 6 || Z
 
     print(get_car_plate_checksum("SBS3229"))  # 8 || P
     print(get_car_plate_checksum("E23"))  # 13 || H
     print(get_car_plate_checksum("SS11"))  # 5 || T
+    print(get_car_plate_checksum("SBA1234"))  # 14 || G
+    print(get_car_plate_checksum("SBP1818"))  # 5 || T
 
 
 if __name__ == '__main__':  # DO NOT EDIT THESE TWO LINES.
