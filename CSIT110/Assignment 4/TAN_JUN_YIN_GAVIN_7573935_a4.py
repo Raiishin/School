@@ -4,7 +4,7 @@ name = 'Tan Jun Yin, Gavin'
 student_num = '7573935'
 subject_code = 'CSIT110'
 # (3) let me get to know you!
-someone_who_inspires_you = ''
+someone_who_inspires_you = 'Elon Musk'
 
 #=========insert solution to question 1 here=============#
 
@@ -33,7 +33,6 @@ class Student:
                 weighted_sum = weighted_sum + result
 
             else:
-                print("hello")
                 raise RecordNotFoundError(key, self.name)
         return weighted_sum
 #============end of solution to question 1===============#
@@ -134,7 +133,8 @@ def example():
     test = {
         "name": "Test",
         "results": {
-            "assignment_1": 10
+            "assignment_1": 10,
+            "assignment_2": 10,
         }
     }
     student = Student(test)
@@ -151,14 +151,14 @@ def example():
                                  "assignment_2": 2,
                                  "examination_1": 4,
                                  }, }]
-    student = Student.dict_to_class_obj(testList)
+    students = Student.dict_to_class_obj(testList)
 
-    print(student[0])
-    print(student[1])
+    for student in students:
+        print(student)
 
     # Raises RecordNotFoundError
     weights = {"assignment_1": 1.0, "examination_1": 3.0, "examination_2": 3.0}
-    # student[0].get_weighted_results(weights)
+    students[0].get_weighted_results(weights)
 
     print(count_presents_unit_test(Student))
     print(count_presents_unit_test(testClass))
@@ -170,7 +170,7 @@ def example():
     print(depth)
 
     # Raises InvalidDepthError
-    # water_body.get_hydrostatic_pressure(-1)
+    water_body.get_hydrostatic_pressure(-1)
 
     density = water_body.compute_density(100, 20)
     print(density)
