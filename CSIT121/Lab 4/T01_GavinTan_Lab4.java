@@ -5,12 +5,13 @@ import java.lang.Math;
 public class T01_GavinTan_Lab4 {
     public static void main(String[] args) {
         Scanner input = new Scanner(System.in);
-        ArrayList<Point> arr = new ArrayList<Point>();
 
         float x, y;
 
         boolean run = true;
         while (run) {
+             ArrayList<Point> arr = new ArrayList<Point>();
+
             for (int count = 1; count <= 3; count++) {
                 System.out.println("X-Coordinate of Point " + count + ": ");
                 x = Float.parseFloat(input.nextLine());
@@ -35,28 +36,26 @@ public class T01_GavinTan_Lab4 {
 }
 
 class Point {
-    float x, y;
-    double distance;
+    private float x, y;
 
     public Point(float xCoord, float yCoord) {
-        x = xCoord;
-        y = yCoord;
+        this.x = xCoord;
+        this.y = yCoord;
     }
 
     float getXCoord() {
-        return x;
+        return this.x;
     }
 
     float getYCoord() {
-        return y;
+        return this.y;
     }
     
     double getDistance(Point point) {
-        double xAxisDistance = Math.pow(point.getXCoord() - x, 2);
-        double yAxisDistance = Math.pow(point.getYCoord() - y, 2);
+        double xAxisDistance = Math.pow(point.getXCoord() - this.x, 2);
+        double yAxisDistance = Math.pow(point.getYCoord() - this.y, 2);
 
-        distance = Math.sqrt((xAxisDistance + yAxisDistance));
-        return distance;
+        return Math.sqrt((xAxisDistance + yAxisDistance));
     }
 
     @Override
@@ -67,7 +66,7 @@ class Point {
 
 class Triangle {
     Point p1, p2, p3;
-    double area;
+    
     public Triangle(Point point1, Point point2, Point point3) {
         p1 = point1;
         p2 = point2;
@@ -80,9 +79,8 @@ class Triangle {
         double c = p3.getDistance(p1);
 
         double s = (a + b + c) / 2;
-        area = Math.sqrt((s * (s-a) * (s-b) * (s-c)));
+        return Math.sqrt((s * (s-a) * (s-b) * (s-c)));
 
-        return area;
     }
 
     @Override
@@ -91,6 +89,6 @@ class Triangle {
         "Point 1: " + p1 + "\n" +
         "Point 2: " + p2 + "\n" + 
         "Point 3: " + p3 + "\n" + 
-        "Total Area: " + area;
+        "Total Area: " + this.getArea();
     }
 }

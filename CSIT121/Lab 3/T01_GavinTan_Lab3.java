@@ -6,16 +6,17 @@ public class T01_GavinTan_Lab3 {
         Scanner input = new Scanner(System.in);
         ArrayList<Parcel> arr = new ArrayList<Parcel>();
 
-        String longDistance = "";
+        Boolean isLongDistance = false;
+        Boolean isExpress = false;
 
         boolean run = true;
         while (run){
             System.out.println("Parcel code: ");
-            String code = input.nextLine();
+            String code = input.nextLine().toUpperCase();
             
             System.out.println("Length: ");
             int length = Integer.parseInt(input.nextLine());
-    
+
             System.out.println("Width: ");
             int width = Integer.parseInt(input.nextLine());
 
@@ -29,13 +30,17 @@ public class T01_GavinTan_Lab3 {
             String selection = input.nextLine().toLowerCase();
 
             if (selection.equals("y")) {
-                code = "Express " + code;
+                isExpress = true;
                 System.out.println("Long distance (y/n)? ");
-                longDistance = input.nextLine().toLowerCase();
+                selection = input.nextLine().toLowerCase();
+
+                if (selection.equals("y")) isLongDistance = true;
             }
 
-            if (longDistance.equals("y")) {
-                Parcel8 parcel = new Parcel8(true, code, length, width, height, weight);
+            if (isExpress) {
+                Parcel8 parcel = new Parcel8(code, length, width, height);
+                parcel.setWeight(weight);
+                if (isLongDistance) parcel.setLongDistance(isLongDistance);
                 parcel.getVolume();
                 parcel.getVolumetricWeight();
                 parcel.getFee();
@@ -43,7 +48,8 @@ public class T01_GavinTan_Lab3 {
                 arr.add(parcel);
 
             } else {
-                Parcel parcel = new Parcel(code, length, width, height,weight);
+                Parcel parcel = new Parcel(code, length, width, height);
+                parcel.setWeight(weight);
                 parcel.getVolume();
                 parcel.getVolumetricWeight();
                 parcel.getFee();
@@ -69,8 +75,8 @@ public class T01_GavinTan_Lab3 {
                 
                 break;
             case "2":
-                for (int count = 0; count < arr.size(); count++) {
-                    if (arr.get(count).getCode().contains("Express")) System.out.println(arr.get(count));
+                for (Parcel parcel: arr) {
+                    if (parcel instanceof Parcel8) System.out.println(parcel);
                 }
 
                 break;
@@ -81,49 +87,54 @@ public class T01_GavinTan_Lab3 {
 }
 
 class Parcel {
-    public String code;
-    public int length, width, height, volume;
-    public float weight, volumentricWeight, fee;
+    private String code;
+    private int length, width, height;
+    private float weight;
     
-    public Parcel(String parcelCode, int parcelLength, int parcelWidth, int parcelHeight, float parcelWeight) {
-        code = parcelCode;
-        length = parcelLength;
-        width = parcelWidth;
-        height = parcelHeight;
-        weight = parcelWeight;
+    public Parcel(String parcelCode, int parcelLength, int parcelWidth, int parcelHeight) {
+        this.code = parcelCode;
+        this.length = parcelLength;
+        this.width = parcelWidth;
+        this.height = parcelHeight;
     }
 
     String getCode () {
-        return code;
+        return this.code;
     }
 
     int getLength () {
-        return length;
+        return this.length;
     }
 
     int getWidth () {
-        return width;
+        return this.width;
     }
 
     int getHeight () {
-        return height;
+        return this.height;
     }
 
-    int getVolume () {
-        volume = length * width * height;
-        return volume;
+    public void setWeight (float weight) {
+        this.weight = weight;
+    }
+
+    float getWeight () {
+        return this.weight;
+    }
+
+    float getVolume () {
+        return this.length * this.width * this.height;
     }
 
     float getVolumetricWeight () {
-        volumentricWeight = (float) volume / 5000;
-        return volumentricWeight;
+        return (float) this.getVolume() / 5000;
     }
 
     float getFee () {
-        float finalWeight = weight;
-        if (weight < volumentricWeight) finalWeight = volumentricWeight;
+        float finalWeight = this.weight;
+        if (finalWeight < this.getVolumetricWeight()) finalWeight = this.getVolumetricWeight();
 
-        fee = 3;
+        float fee = 3;
         finalWeight -= 1;
 
         while (finalWeight > 0) {
@@ -131,31 +142,32 @@ class Parcel {
             finalWeight -= 1;
         }
 
-        if (code.contains("Express")) fee += (fee * 0.2);
-
         return fee;
     }
 
     @Override
     public String toString () {
-        return code + " $" + fee;
+        return this.getCode() + " $" + this.getFee();
     }
 }
 
 class Parcel8 extends Parcel {
-    public Boolean longDistance;
+    private Boolean longDistance = false;
 
-    public Parcel8(Boolean isLongDistance, String parcelCode, int parcelLength, int parcelWidth, int parcelHeight, float parcelWeight) {
-        super(parcelCode, parcelLength, parcelWidth, parcelHeight, parcelWeight);
-        longDistance = isLongDistance;
+    public Parcel8(String parcelCode, int parcelLength, int parcelWidth, int parcelHeight) {
+        super(parcelCode, parcelLength, parcelWidth, parcelHeight);
     }
+
+    public void setLongDistance(Boolean isLongDistance) {
+        this.longDistance = isLongDistance;
+      }
 
     @Override
     float getFee() {
-        float finalWeight = weight;
-        if (weight < volumentricWeight) finalWeight = volumentricWeight;
+        float finalWeight = this.getWeight();
+        if (finalWeight < this.getVolumetricWeight()) finalWeight = this.getVolumetricWeight();
 
-        fee = 3;
+        float fee = 3;
         finalWeight -= 1;
 
         while (finalWeight > 0) {
@@ -163,13 +175,14 @@ class Parcel8 extends Parcel {
             finalWeight -= 1;
         }
 
-        if (code.contains("Express")) fee += (fee * 0.35);
-
+        if (this.longDistance) fee = (float) (fee * 1.35);
+        else fee = (float) (fee * 1.2);
+        
         return fee;
     }
 
     @Override
     public String toString () {
-        return code + " $" + fee;
+        return "Express " + this.getCode() + " $" + this.getFee();
     }
 }

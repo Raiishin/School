@@ -30,7 +30,7 @@ public class T01_GavinTan_A2 {
                     modelCode = input.nextLine().toUpperCase();
     
                     for (int count = 0; count < toyCarArr.size(); count++) {
-                        if (toyCarArr.get(count).code.equals(modelCode)) {
+                        if (toyCarArr.get(count).getCode().equals(modelCode)) {
                             isPresent = true;
                             System.out.println("This model is already in the inventory");
                         }
@@ -63,13 +63,15 @@ public class T01_GavinTan_A2 {
                             }
     
                             System.out.println("Enter Charging Duration (minutes): ");
-                            int ChargingDuration = Integer.parseInt(input.nextLine());
-                            if (ChargingDuration <= 0) {
+                            int chargingDuration = Integer.parseInt(input.nextLine());
+                            if (chargingDuration <= 0) {
                                 System.out.println("Invalid Charging Duration");
                                 break;
                             }
                             
-                            ToyCarElect car = new ToyCarElect(modelCode, quantity, price,batteryDuration,ChargingDuration);
+                            ToyCarElect car = new ToyCarElect(modelCode, quantity, price);
+                            car.setBatteryDuration(batteryDuration);
+                            car.setChargingDuration(chargingDuration);
                             car.getTotalInventoryWorth();
                             car.getInsuranceCost();
                             toyCarElectArr.add(car);
@@ -87,19 +89,19 @@ public class T01_GavinTan_A2 {
                     modelCode = input.nextLine().toUpperCase();
     
                     for (int count = 0; count < toyCarArr.size(); count++) {
-                        if (toyCarArr.get(count).code.equals(modelCode)) {
+                        if (toyCarArr.get(count).getCode().equals(modelCode)) {
                             isPresent = true;
     
-                            if (toyCarArr.get(count).quantity > 0) System.out.println("There is " + toyCarArr.get(count).quantity + " more left in the inventory");
+                            if (toyCarArr.get(count).getQuantity() > 0) System.out.println("There is " + toyCarArr.get(count).getQuantity() + " more left in the inventory");
                             else toyCarArr.remove(count);
                         }
                     }
 
                     for (int count = 0; count < toyCarElectArr.size(); count++) {
-                        if (toyCarElectArr.get(count).code.equals(modelCode)) {
+                        if (toyCarElectArr.get(count).getCode().equals(modelCode)) {
                             isPresent = true;
     
-                            if (toyCarElectArr.get(count).quantity > 0) System.out.println("There is " + toyCarElectArr.get(count).quantity + " more left in the inventory");
+                            if (toyCarElectArr.get(count).getQuantity() > 0) System.out.println("There is " + toyCarElectArr.get(count).getQuantity() + " more left in the inventory");
                             else toyCarElectArr.remove(count);
                         }
                     }
@@ -117,14 +119,14 @@ public class T01_GavinTan_A2 {
                     modelCode = input.nextLine().toUpperCase();
     
                     for (int count = 0; count < toyCarArr.size(); count++) {
-                        if (toyCarArr.get(count).code.equals(modelCode)) {
+                        if (toyCarArr.get(count).getCode().equals(modelCode)) {
                             isPresent = true;
                             System.out.println(toyCarArr.get(count));
                         }
                     }
     
                     for (int count = 0; count < toyCarElectArr.size(); count++) {
-                        if (toyCarElectArr.get(count).code.equals(modelCode)) {
+                        if (toyCarElectArr.get(count).getCode().equals(modelCode)) {
                             isPresent = true;
                             System.out.println(toyCarElectArr.get(count));
                         }
@@ -141,14 +143,14 @@ public class T01_GavinTan_A2 {
                     float upperBound = Float.parseFloat(input.nextLine());
     
                     for (int count = 0; count < toyCarArr.size(); count++) {
-                        if (toyCarArr.get(count).price >= lowerBound && toyCarArr.get(count).price <= upperBound) {
+                        if (toyCarArr.get(count).getPrice() >= lowerBound && toyCarArr.get(count).getPrice() <= upperBound) {
                             isPresent = true;
                             System.out.println(toyCarArr.get(count));
                         }
                     }
     
                     for (int count = 0; count < toyCarElectArr.size(); count++) {
-                        if (toyCarElectArr.get(count).price >= lowerBound && toyCarElectArr.get(count).price <= upperBound) {
+                        if (toyCarElectArr.get(count).getPrice() >= lowerBound && toyCarElectArr.get(count).getPrice() <= upperBound) {
                             isPresent = true;
                             System.out.println(toyCarElectArr.get(count));
                         }
@@ -162,7 +164,7 @@ public class T01_GavinTan_A2 {
                     float batteryDuration = Float.parseFloat(input.nextLine());
     
                     for (int count = 0; count < toyCarElectArr.size(); count++) {
-                        if (toyCarElectArr.get(count).batteryDuration >= batteryDuration) {
+                        if (toyCarElectArr.get(count).getBatteryDuration() >= batteryDuration) {
                             isPresent = true;
                             System.out.println(toyCarElectArr.get(count));
                         }
@@ -180,47 +182,68 @@ public class T01_GavinTan_A2 {
 }
 
 class ToyCar {
-    String code;
-    int quantity;
-    float price, totalInventoryWorth;
+    private String code;
+    private int quantity;
+    private float price;
 
     public ToyCar(String carCode, int carQuantity, float carPrice) {
-        code = carCode;
-        quantity = carQuantity;
-        price = carPrice;
+        this.code = carCode;
+        this.quantity = carQuantity;
+        this.price = carPrice;
+    }
+
+    String getCode () {
+        return this.code;
+    }
+
+    int getQuantity() {
+        return this.quantity;
+    }
+    
+    float getPrice () {
+        return this.price;
     }
 
     float getTotalInventoryWorth () {
-        totalInventoryWorth = (float) price * quantity;
-        return totalInventoryWorth;
+        return (float) price * quantity;
     }
 
     float getInsuranceCost () {
-        return (float) 0.02 * totalInventoryWorth;
+        return (float) 0.02 * this.getTotalInventoryWorth();
     }
 
     @Override
     public String toString () {
-        return "Model: " + code + " (Self pedaling) Price: $" + price + " Quantity: " + quantity;
+        return "Model: " + this.getCode() + " (Self pedaling) Price: $" + this.getPrice() + " Quantity: " + this.getQuantity();
     }
 }
 
 class ToyCarElect extends ToyCar {
-    protected int batteryDuration, chargingDuration;
+    private int batteryDuration, chargingDuration;
 
-    public ToyCarElect(String carCode, int carQuantity, float carPrice, int battery, int charging) {
+    public ToyCarElect(String carCode, int carQuantity, float carPrice) {
         super(carCode, carQuantity, carPrice);
-        batteryDuration = battery;
-        chargingDuration = charging;
+    }   
+
+    public void setBatteryDuration(int duration) {
+        this.batteryDuration = duration;
+    }
+
+    int getBatteryDuration() {
+        return this.batteryDuration;
+    }
+    
+    public void setChargingDuration(int duration) {
+        this.chargingDuration = duration;
     }
 
     @Override
     float getInsuranceCost () {
-        return (float) 0.1 * totalInventoryWorth;
+        return (float) 0.1 * this.getTotalInventoryWorth();
     }
 
     @Override
     public String toString () {
-        return "Model: " + code + " (Battery-powered) Price: $" + price + " Quantity: " + quantity;
+        return "Model: " + this.getCode() + " (Battery-powered) Price: $" + this.getPrice() + " Quantity: " + this.getQuantity();
     }
 }
