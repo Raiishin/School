@@ -16,4 +16,3 @@ cloudcover.txt
 // "next day" forecasted atmospheric pressure intensity (%) for
 // each [x,y] grid-area
 pressure.txt
-

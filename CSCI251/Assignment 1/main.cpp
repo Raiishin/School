@@ -5,20 +5,83 @@
 
 using namespace std;
 
+void split(string str, char seperator)
+{
+    int currIndex = 0, i = 0;
+    int startIndex = 0, endIndex = 0;
+    while (i <= str.length())
+    {
+        if (str[i] == seperator || i == str.length())
+        {
+            endIndex = i;
+            string subStr = "";
+            subStr.append(str, startIndex, endIndex - startIndex);
+            strings[currIndex] = subStr;
+
+            currIndex += 1;
+            startIndex = endIndex + 1;
+        }
+        i++;
+    }
+}
+
 void displayCityMap(int xAxisLimit, int yAxisLimit, string cityLocationFilename)
 {
     // TODO :: Build the grid row by row
     cout << "City Map: " << endl;
 
-    for (int i = 0; i <= yAxisLimit; i++)
-    {
+    cout << "  ";
 
-        for (int j = 0; j <= xAxisLimit; j++)
+    // Print top row
+    for (int i = 0; i <= yAxisLimit + 2; i++)
+    {
+        cout << "# ";
+    }
+
+    cout << endl;
+
+    for (int i = 1; i <= yAxisLimit + 2; i++)
+    {
+        int edge = yAxisLimit - i;
+
+        // Print first 2 columns
+        if (edge >= 0)
         {
-            if (j > 0)
-                cout << "# ";
-            if (i == yAxisLimit)
+            cout << edge;
+            cout << " # ";
+        }
+
+        // Print bottom left corner
+        if (edge == -1)
+            cout << "  # ";
+
+        // Indent for bottom row
+        if (edge == -2)
+            cout << "    ";
+
+        for (int j = 0; j <= xAxisLimit + 2; j++)
+        {
+            // Print bottom margin row
+            if (i == yAxisLimit + 1)
+            {
+                cout << "#";
+            }
+
+            // Print bottom row
+            if (i == yAxisLimit + 2 && j <= xAxisLimit + 1)
+            {
                 cout << j;
+                cout << " ";
+            }
+            else
+            {
+                if (j >= xAxisLimit - 1)
+                    cout << " ";
+                else if (j >= 0)
+                    cout << " ";
+                else if (j < 0)
+                    cout << j;
+            }
         }
 
         cout << endl;
@@ -55,6 +118,21 @@ int main()
     int yAxisLimit = fileTextArray[1].back() - '0';
 
     string cityLocationFilename = "assets/" + fileTextArray[2];
+
+    file.open(cityLocationFilename);
+
+    if (file.is_open())
+    {
+        while (getline(file, line))
+        {
+            split(line, '-');
+            cout << line << endl;
+        }
+        file.close();
+    }
+    else
+        cout << "No such file can be found";
+
     string cloudCoverFilename = "assets/" + fileTextArray[3];
     string pressureFilename = "assets/" + fileTextArray[4];
 
@@ -64,7 +142,7 @@ int main()
     // cout << cloudCoverFilename << endl;
     // cout << pressureFilename << endl;
 
-    displayCityMap(xAxisLimit, yAxisLimit, cityLocationFilename);
+    // displayCityMap(xAxisLimit, yAxisLimit, cityLocationFilename);
 
     return 0;
 }
