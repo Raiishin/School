@@ -18,13 +18,6 @@ void Map::displayMap(int userChoiceNumber)
     Two_D_Array::initialize2DArray(p2DArray, numberOfRows, numberOfColumns);
     Two_D_Array::assignValuesTo2DArray(p2DArray, userChoiceNumber);
 
-    formatMap(p2DArray, numberOfRows, numberOfColumns, userChoiceNumber);
-
-    Two_D_Array::delete2DArray(p2DArray, numberOfRows, numberOfColumns);
-}
-
-void Map::formatMap(int **p2DArray, int numberOfRows, int numberOfColumns, int userChoiceNumber)
-{
     for (int i = (mapSize.maxY + 1); i >= (mapSize.minY - 2); i--)
     {
         ((i >= mapSize.minY) && (i <= mapSize.maxY)) ? printData(to_string(i)) : printData(" ");
@@ -54,6 +47,7 @@ void Map::formatMap(int **p2DArray, int numberOfRows, int numberOfColumns, int u
         }
         cout << endl;
     }
+    Two_D_Array::delete2DArray(p2DArray, numberOfRows, numberOfColumns);
 }
 
 void Map::print2DArrayValue(int value, int userChoiceNumber)
