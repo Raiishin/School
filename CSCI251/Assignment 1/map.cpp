@@ -10,19 +10,20 @@ using namespace std;
 
 void Map::displayMap(int userChoiceNumber)
 {
-    int noOfCols = calculateMapSize(mapSize.minX, mapSize.maxX);
-    int noOfRows = calculateMapSize(mapSize.minY, mapSize.maxY);
+    int numberOfColumns = mapSize.maxX - mapSize.minX + 1;
+    int numberOfRows = mapSize.maxY - mapSize.minY + 1;
 
-    int **p2DArray = Two_D_Array::allocate2DArray(noOfRows, noOfCols);
-    Two_D_Array::initialize2DArray(p2DArray, noOfRows, noOfCols);
+    int **p2DArray = Two_D_Array::allocate2DArray(numberOfRows, numberOfColumns);
+
+    Two_D_Array::initialize2DArray(p2DArray, numberOfRows, numberOfColumns);
     Two_D_Array::assignValuesTo2DArray(p2DArray, userChoiceNumber);
 
-    formatMap(p2DArray, noOfRows, noOfCols, userChoiceNumber);
+    formatMap(p2DArray, numberOfRows, numberOfColumns, userChoiceNumber);
 
-    Two_D_Array::delete2DArray(p2DArray, noOfRows, noOfCols);
+    Two_D_Array::delete2DArray(p2DArray, numberOfRows, numberOfColumns);
 }
 
-void Map::formatMap(int **p2DArray, int noOfRows, int noOfCols, int userChoiceNumber)
+void Map::formatMap(int **p2DArray, int numberOfRows, int numberOfColumns, int userChoiceNumber)
 {
     for (int i = (mapSize.maxY + 1); i >= (mapSize.minY - 2); i--)
     {
@@ -30,15 +31,14 @@ void Map::formatMap(int **p2DArray, int noOfRows, int noOfCols, int userChoiceNu
 
         for (int j = (mapSize.minX - 1); j <= (mapSize.maxX + 1); j++)
         {
-            // If  minimum IdxRange != 0, make adjustment when accessing the current coordinates
             int xCoordinate = calculateCoordinate(j, mapSize.minX);
             int yCoordinate = calculateCoordinate(i, mapSize.minY);
 
-            if (isXAxis(i))
+            if (i == (mapSize.minY - 2))
             {
                 ((j == (mapSize.minX - 1)) || (j == mapSize.maxX + 1)) ? printData(" ") : printData(to_string(j));
             }
-            else if (isBorder(i, j))
+            else if ((j == mapSize.minX - 1) || (j == mapSize.maxX + 1) || (i == mapSize.minY - 1) || (i == mapSize.maxY + 1))
             {
                 printData("#");
             }
@@ -54,21 +54,6 @@ void Map::formatMap(int **p2DArray, int noOfRows, int noOfCols, int userChoiceNu
         }
         cout << endl;
     }
-}
-
-bool Map::isXAxis(int i)
-{
-    return (i == (mapSize.minY - 2));
-}
-
-bool Map::isBorder(int i, int j)
-{
-    return ((j == mapSize.minX - 1) || (j == mapSize.maxX + 1) || (i == mapSize.minY - 1) || (i == mapSize.maxY + 1));
-}
-
-bool Map::isWithinRange(int min, int max, int value)
-{
-    return ((min <= value) && (value < max));
 }
 
 void Map::print2DArrayValue(int value, int userChoiceNumber)
@@ -93,11 +78,6 @@ void Map::printData(string data)
     cout << right << setw(4) << data;
 }
 
-int Map::calculateMapSize(int min, int max)
-{
-    return ((max - min) + 1);
-}
-
 int Map::calculateCoordinate(int index, int minIdxrange)
 {
     return (minIdxrange == 0) ? index : index + (0 - minIdxrange);
@@ -105,16 +85,10 @@ int Map::calculateCoordinate(int index, int minIdxrange)
 
 char Map::getLMH_Symbol(int value)
 {
-    if (isWithinRange(0, 35, value))
-    {
+    if (value >= 0 && value < 35)
         return 'L';
-    }
-    else if (isWithinRange(35, 65, value))
-    {
+    else if (value >= 35 && value < 65)
         return 'M';
-    }
     else
-    {
         return 'H';
-    }
 }
