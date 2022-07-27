@@ -1,148 +1,181 @@
+// g++ -std=c++11 main.cpp readFile.cpp structs.cpp map.cpp twoDimensionalArray.cpp summaryReport.cpp -o main.exe
+
 #include <iostream>
-#include <fstream>
+#include <iomanip>
+#include <limits>
 #include <vector>
-#include <string>
+
+#include "readFile.h"
+#include "structs.h"
+#include "map.h"
+#include "summaryReport.h"
 
 using namespace std;
 
-void split(string str, char seperator)
-{
-    int currIndex = 0, i = 0;
-    int startIndex = 0, endIndex = 0;
-    while (i <= str.length())
-    {
-        if (str[i] == seperator || i == str.length())
-        {
-            endIndex = i;
-            string subStr = "";
-            subStr.append(str, startIndex, endIndex - startIndex);
-            strings[currIndex] = subStr;
+/* ------------------------------------ Global Constant Variables ------------------------------------ */
+const string DIVIDER = "-----------------------------------------------------------\n";
+const string STUDENT_INFORMATION[4] = {
+    "Student ID", ": 7573935", "Stduent Name", ": TAN JUN YIN GAVIN"};
 
-            currIndex += 1;
-            startIndex = endIndex + 1;
-        }
-        i++;
-    }
-}
+const string OPTIONS[] = {
+    "1)", "Read in and process a configuration file",
+    "2)", "Display city map",
+    "3)", "Display cloud coverage map (cloudiness index)",
+    "4)", "Display cloud coverage map (LMH symbols)",
+    "5)", "Display atmospheric pressure map (pressure index)",
+    "6)", "Display atmospheric pressure map (LMH symbols)",
+    "7)", "Show weather forecast summary report",
+    "8)", "Quit"};
 
-void displayCityMap(int xAxisLimit, int yAxisLimit, string cityLocationFilename)
-{
-    // TODO :: Build the grid row by row
-    cout << "City Map: " << endl;
+/* --------------------------------------- Function Definitions --------------------------------------- */
+void executeWeatherInformationProcessingSystem();
 
-    cout << "  ";
+void printMainMenu();
+void printStringArray(const string arrayName[], int size, int width);
+void setWidth(string str, int width);
 
-    // Print top row
-    for (int i = 0; i <= yAxisLimit + 2; i++)
-    {
-        cout << "# ";
-    }
+int getUserChoiceInput();
+bool integerValidation(int userInput);
 
-    cout << endl;
+void printOption(int userChoiceInput);
 
-    for (int i = 1; i <= yAxisLimit + 2; i++)
-    {
-        int edge = yAxisLimit - i;
+void processUserChoiceInput(int userChoiceInput, bool &isQuit);
+void executeUserChoiceInput(int choiceNumber);
+void promptUserToPressEnterToContinue();
 
-        // Print first 2 columns
-        if (edge >= 0)
-        {
-            cout << edge;
-            cout << " # ";
-        }
-
-        // Print bottom left corner
-        if (edge == -1)
-            cout << "  # ";
-
-        // Indent for bottom row
-        if (edge == -2)
-            cout << "    ";
-
-        for (int j = 0; j <= xAxisLimit + 2; j++)
-        {
-            // Print bottom margin row
-            if (i == yAxisLimit + 1)
-            {
-                cout << "#";
-            }
-
-            // Print bottom row
-            if (i == yAxisLimit + 2 && j <= xAxisLimit + 1)
-            {
-                cout << j;
-                cout << " ";
-            }
-            else
-            {
-                if (j >= xAxisLimit - 1)
-                    cout << " ";
-                else if (j >= 0)
-                    cout << " ";
-                else if (j < 0)
-                    cout << j;
-            }
-        }
-
-        cout << endl;
-    }
-}
-
+/* ------------------------------------------------------------------------------------------------ */
 int main()
 {
-    string filename = "";
-    string line = "";
-    vector<string> fileTextArray;
+    executeWeatherInformationProcessingSystem();
+}
 
-    fstream file;
-
-    cout << "Please enter config filename : ";
-    filename = "assets/config.txt";
-    // cin >> filename;
-
-    file.open(filename);
-
-    if (file.is_open())
+void executeWeatherInformationProcessingSystem()
+{
+    bool isQuit = false;
+    do
     {
-        while (getline(file, line))
+        printMainMenu();
+        int userChoiceInput = getUserChoiceInput();
+        printOption(userChoiceInput);
+        processUserChoiceInput(userChoiceInput, isQuit);
+
+    } while (!isQuit);
+}
+
+void printMainMenu()
+{
+    printStringArray(STUDENT_INFORMATION, 4, 15);
+    cout << DIVIDER << "Welcome to Weather Information Processing System!\n"
+         << endl;
+    printStringArray(OPTIONS, sizeof(OPTIONS) / sizeof(string), 7);
+}
+
+void printStringArray(const string arrayName[], int size, int width)
+{
+    for (int i = 0; i < size; i++)
+    {
+        if (i % 2 == 0)
         {
-            if (line.length() != 0 && line.find("//"))
-                fileTextArray.push_back(line);
+            setWidth(arrayName[i], width);
         }
-        file.close();
+        else
+        {
+            cout << arrayName[i] << endl;
+        }
+    }
+}
+
+void setWidth(string str, int width)
+{
+    cout << left << setw(width) << str;
+}
+
+int getUserChoiceInput()
+{
+    int validatedInput = -1, userInput;
+    bool isInteger = false;
+    do
+    {
+        cout << "\nPlease enter your choice : ";
+        cin >> userInput;
+        isInteger = integerValidation(userInput);
+    } while (!isInteger);
+
+    validatedInput = userInput;
+    return validatedInput;
+}
+
+bool integerValidation(int userInput)
+{
+    bool isInteger = false;
+    if (!isdigit(userInput) && !(userInput >= 1 && userInput <= 8))
+    {
+        cin.clear();
+        cin.ignore(numeric_limits<streamsize>::max(), '\n');
+        cerr << "ERROR : Invalid Input" << endl;
     }
     else
-        cout << "No such file can be found";
-
-    int xAxisLimit = fileTextArray[0].back() - '0';
-    int yAxisLimit = fileTextArray[1].back() - '0';
-
-    string cityLocationFilename = "assets/" + fileTextArray[2];
-
-    file.open(cityLocationFilename);
-
-    if (file.is_open())
     {
-        while (getline(file, line))
-        {
-            split(line, '-');
-            cout << line << endl;
-        }
-        file.close();
+        isInteger = true;
+    }
+    return isInteger;
+}
+
+void printOption(int userChoiceInput)
+{
+    cout << "\n[" << OPTIONS[(userChoiceInput * 2) - 1] << "]" << endl;
+    if (userChoiceInput != 1)
+    {
+        cout << "\n";
+    }
+}
+
+void processUserChoiceInput(int userChoiceInput, bool &isQuit)
+{
+    if (userChoiceInput == 8)
+    {
+        isQuit = true;
+        cityLocations_Vector.clear();
+        cloudCovers_Vector.clear();
+        atmosphericPressures_Vector.clear();
     }
     else
-        cout << "No such file can be found";
+    {
+        executeUserChoiceInput(userChoiceInput);
+        if (userChoiceInput >= 2 && userChoiceInput <= 7)
+        {
+            promptUserToPressEnterToContinue();
+        }
+    }
+}
 
-    string cloudCoverFilename = "assets/" + fileTextArray[3];
-    string pressureFilename = "assets/" + fileTextArray[4];
+void executeUserChoiceInput(int choiceNumber)
+{
+    if (choiceNumber == 1)
+    {
+        ReadFile::processConfigFile();
+    }
+    else if (choiceNumber >= 2 && choiceNumber <= 6)
+    {
+        Map::displayMap(choiceNumber);
+    }
+    else
+    {
+        cout << "Weather Forecast Summary Report\n"
+             << DIVIDER << endl;
 
-    // cout << xAxisLimit << endl;
-    // cout << yAxisLimit << endl;
-    // cout << cityLocationFilename << endl;
-    // cout << cloudCoverFilename << endl;
-    // cout << pressureFilename << endl;
+        SummaryReport::displayWeatherForecastSummaryReport();
+    }
+}
 
-    // displayCityMap(xAxisLimit, yAxisLimit, cityLocationFilename);
-
-    return 0;
+void promptUserToPressEnterToContinue()
+{
+    cin.ignore(1000, '\n');
+    string userInput = "";
+    do
+    {
+        cout << "\nPress <enter> to go back to main menu ...";
+        getline(cin, userInput);
+    } while (userInput.length() != 0);
+    cout << endl;
 }
