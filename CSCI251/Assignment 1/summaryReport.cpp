@@ -31,30 +31,14 @@ vector<SummaryReport::CityInformation> cityInformations_Vector;
 
 void SummaryReport::displayWeatherForecastSummaryReport()
 {
-    collateSummaryReportDetailsForEachCity();
-    printCityInformation_Vector();
-}
-
-void SummaryReport::collateSummaryReportDetailsForEachCity()
-{
     map<int, int> occurenceOfEachCityId;
-    countTotalOccurenceOfEachCityId(occurenceOfEachCityId);
-    storeTotalOccurenceOfEachCityId(occurenceOfEachCityId);
-    storeCityInformation();
-}
 
-map<int, int> SummaryReport::countTotalOccurenceOfEachCityId(map<int, int> &occurenceOfEachCityId)
-{
     for (int i = 0; i < cityLocations_Vector.size(); i++)
     {
         int cityId = cityLocations_Vector[i].cityId;
         occurenceOfEachCityId[cityId]++;
     }
-    return occurenceOfEachCityId;
-}
 
-void SummaryReport::storeTotalOccurenceOfEachCityId(map<int, int> &occurenceOfEachCityId)
-{
     map<int, int>::iterator it;
     for (it = occurenceOfEachCityId.begin(); it != occurenceOfEachCityId.end(); it++)
     {
@@ -63,10 +47,7 @@ void SummaryReport::storeTotalOccurenceOfEachCityId(map<int, int> &occurenceOfEa
         cityInformation.otherInformation.totalOccurrence = value;
         cityInformations_Vector.push_back(cityInformation);
     }
-}
 
-void SummaryReport::storeCityInformation()
-{
     for (int i = 0; i < cityInformations_Vector.size(); i++)
     {
         SummaryReport::CityInformation &city = cityInformations_Vector[i];
@@ -74,6 +55,12 @@ void SummaryReport::storeCityInformation()
         store_Final_XYrange(city);
         storeSumAndAverage(city);
         storeRainProbabilityAndGraphics(city);
+    }
+
+    for (int i = 0; i < cityInformations_Vector.size(); i++)
+    {
+        cout << cityInformations_Vector[i].toString() << "\n"
+             << endl;
     }
 }
 
@@ -93,11 +80,22 @@ void SummaryReport::store_Original_XYrange(CityInformation &city, const int inde
     }
 }
 
+void SummaryReport::store_Final_XYrange(CityInformation &city)
+{
+    SummaryReport::CityInformation::OtherInformation &cityOtherInformation = city.otherInformation;
+
+    cityOtherInformation.finalRange.minX = getMinValue((cityOtherInformation.originalRange.minX - 1), mapSize.minX);
+    cityOtherInformation.finalRange.minY = getMinValue((cityOtherInformation.originalRange.minY - 1), mapSize.minY);
+
+    cityOtherInformation.finalRange.maxX = getMaxValue((cityOtherInformation.originalRange.maxX + 1), mapSize.maxX);
+    cityOtherInformation.finalRange.maxY = getMaxValue((cityOtherInformation.originalRange.maxY + 1), mapSize.maxY);
+}
+
 void SummaryReport::findRespectiveData(int &minX, int &maxX, int &minY, int &maxY, int &count, string &cityName, const int index)
 {
     for (int j = 0; j < cityLocations_Vector.size(); j++)
     {
-        if (isTheSameCityId(cityInformations_Vector[index].cityId, cityLocations_Vector[j].cityId))
+        if (cityInformations_Vector[index].cityId == cityLocations_Vector[j].cityId)
         {
             int Xcoordinate = cityLocations_Vector[j].Xcoordinate, Ycoordinate = cityLocations_Vector[j].Ycoordinate;
 
@@ -110,46 +108,20 @@ void SummaryReport::findRespectiveData(int &minX, int &maxX, int &minY, int &max
             }
             else
             {
-                minX = minValue(Xcoordinate, minX);
-                maxX = maxValue(Xcoordinate, maxX);
+                minX = getMinValue(Xcoordinate, minX);
+                maxX = getMaxValue(Xcoordinate, maxX);
 
-                minY = minValue(Ycoordinate, minY);
-                maxY = maxValue(Ycoordinate, maxY);
+                minY = getMinValue(Ycoordinate, minY);
+                maxY = getMaxValue(Ycoordinate, maxY);
             }
             count++;
         }
     }
 }
 
-bool SummaryReport::isTheSameCityId(int a, int b) { return (a == b); }
+int SummaryReport::getMinValue(int a, int b) { return ((a < b) ? a : b); }
 
-int SummaryReport::minValue(int a, int b) { return ((a < b) ? a : b); }
-
-int SummaryReport::maxValue(int a, int b) { return ((a > b) ? a : b); }
-
-void SummaryReport::store_Final_XYrange(CityInformation &city)
-{
-    SummaryReport::CityInformation::OtherInformation &cityOtherInformation = city.otherInformation;
-
-    cityOtherInformation.finalRange.minX = getMin((cityOtherInformation.originalRange.minX - 1), mapSize.minX);
-    cityOtherInformation.finalRange.minY = getMin((cityOtherInformation.originalRange.minY - 1), mapSize.minY);
-
-    cityOtherInformation.finalRange.maxX = getMax((cityOtherInformation.originalRange.maxX + 1), mapSize.maxX);
-    cityOtherInformation.finalRange.maxY = getMax((cityOtherInformation.originalRange.maxY + 1), mapSize.maxY);
-}
-
-int SummaryReport::getMin(int a, int b) { return ((a < b) ? b : a); }
-
-int SummaryReport::getMax(int a, int b) { return ((a > b) ? b : a); }
-
-void SummaryReport::printCityInformation_Vector()
-{
-    for (int i = 0; i < cityInformations_Vector.size(); i++)
-    {
-        cout << cityInformations_Vector[i].toString() << "\n"
-             << endl;
-    }
-}
+int SummaryReport::getMaxValue(int a, int b) { return ((a > b) ? a : b); }
 
 void SummaryReport::storeSumAndAverage(CityInformation &city)
 {
@@ -162,20 +134,6 @@ void SummaryReport::storeSumAndAverage(CityInformation &city)
 
     int count = 0, cloudCoverSum = 0, atmosphericPressureSum = 0;
 
-    calculateSum(cloudCoverSum, atmosphericPressureSum, count, minX, maxX, minY, maxY);
-    cityOtherInformation.sumCloudCover = cloudCoverSum;
-    cityOtherInformation.sumAtmosphericPressure = atmosphericPressureSum;
-    cityOtherInformation.citySize = count;
-
-    double cloudAverageValue = getTwoSigFigValue((double)cloudCoverSum / count);
-    double pressureAverageValue = getTwoSigFigValue((double)atmosphericPressureSum / count);
-
-    city.averageCloudCover = cloudAverageValue;
-    city.averageAtmosphericPressure = pressureAverageValue;
-}
-
-void SummaryReport::calculateSum(int &cloudCoverSum, int &atmosphericPressureSum, int &count, int minX, int maxX, int minY, int maxY)
-{
     for (int minRow = minY; minRow <= maxY; minRow++)
     {
         for (int minCol = minX; minCol <= maxX; minCol++)
@@ -185,6 +143,16 @@ void SummaryReport::calculateSum(int &cloudCoverSum, int &atmosphericPressureSum
             count++;
         }
     }
+
+    cityOtherInformation.sumCloudCover = cloudCoverSum;
+    cityOtherInformation.sumAtmosphericPressure = atmosphericPressureSum;
+    cityOtherInformation.citySize = count;
+
+    double cloudAverageValue = getTwoSigFigValue((double)cloudCoverSum / count);
+    double pressureAverageValue = getTwoSigFigValue((double)atmosphericPressureSum / count);
+
+    city.averageCloudCover = cloudAverageValue;
+    city.averageAtmosphericPressure = pressureAverageValue;
 }
 
 int SummaryReport::getCloudCoverValue(int rowIndex, int colIndex)

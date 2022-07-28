@@ -3,13 +3,10 @@
 
 namespace Two_D_Array
 {
-int **allocate2DArray(int rows, int cols);
-void initialize2DArray(int **p2DArray, int rows, int cols);
-void assignValuesTo2DArray(int **p2DArray, int userChoiceNumber);
-void assign_CityLocation_Values(int **p2DArray);
-void assign_CloudCover_Values(int **p2DArray);
-void assign_AtmosphericPressure_Values(int **p2DArray);
-int calculateCoordinate(int coordinate, int minIdxrange);
-void delete2DArray(int **p2DArray, int rows, int cols);
+    int **allocate(int rows, int cols);
+    void initialize(int **p2DArray, int rows, int cols);
+    void assignValues(int **p2DArray, int userChoiceNumber);
+    int calculateCoordinate(int coordinate, int minIdxrange);
+    void clear(int **p2DArray, int rows, int cols);
 }
 #endif
