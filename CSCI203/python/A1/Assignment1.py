@@ -47,6 +47,10 @@ define a main function with an input argument of L
         counter + 1
 
     return returnArr
+
+Runtime Complexity: T(n) = O(n)
+
+How to run? python3 Assignment1.py
 """
 
 import math
