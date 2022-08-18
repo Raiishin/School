@@ -47,6 +47,7 @@ class Customer:
 class Servers:
     primary_server_array = []
     secondary_server_array = []
+    accumulated_service_requirement = 0
 
     def __init__(self, primary_servers, secondary_servers):
         for i in range(int(primary_servers)):
@@ -60,11 +61,12 @@ class Servers:
     def __str__(self):
         return f"{self.primary_server_array}"
 
-    def are_there_still_customers_to_be_served(self):
+    def are_there_still_customers_to_be_served(self, primary_queue, secondary_queue):
         print("Checking if there are still customers to be served \n")
         for i in range(len(self.primary_server_array)):
             pServer = self.primary_server_array[i]
             if pServer['status'] == "busy":
+                primary_queue.process_time()
                 return True
                     
             
@@ -72,6 +74,7 @@ class Servers:
         for i in range(len(self.secondary_server_array)):
             sServer = self.secondary_server_array[i]
             if sServer['status'] == "busy":
+                secondary_queue.process_time()
                 return True
 
 
@@ -90,11 +93,9 @@ class Servers:
 
     def process_customer_in_secondary_queue(self, secondary_queue, simulated_minute):
         for i in range(len(self.secondary_server_array)):
-            print("\n Secondary Queue",secondary_queue.size()," \n")
-
             sServer = self.secondary_server_array[i]
             if self.check_status(sServer) == "available" and secondary_queue.size() > 0:
-                print("processing customer finish primary moving to secondary")
+                print("\nprocessing customer finish primary moving to secondary\n")
                 customer = secondary_queue.dequeue()
                 wait_time = simulated_minute - customer.get_secondary_arrival_time()
 
@@ -115,7 +116,7 @@ class Servers:
                 if sServer['service'] == 0:
                     sServer['status'] = "available"
                     sServer['customer'] = ""
-                    
+
         for i in range(len(self.primary_server_array)):
             pServer = self.primary_server_array[i]
 
@@ -149,6 +150,7 @@ class Servers:
     def assign_customer(self, server, customer, service_time):
         server['service'] = service_time
         server['customer'] = customer
+        self.accumulated_service_requirement += service_time
         self.check_status(server)
 
     def get_server_status(self):
@@ -159,6 +161,8 @@ class Servers:
             sServer = self.secondary_server_array[i]
             print(sServer)
 
+    def get_accumulated_service_requirement(self):
+        return self.accumulated_service_requirement
 
 class Queue:
     def __init__(self):
@@ -168,7 +172,16 @@ class Queue:
         self.total_time_passed = 1
 
     def __str__(self):
-        return f"Total Customers: {self.total_customer_count}, with total time spent: {self.total_time_passed}"
+        return f"Total Customers: {self.total_customer_count}, with total time spent: {self.total_time_passed}\nMost customers waiting at 1 point of time: {self.max_size}\nAverage total time in Queue: {self.get_average_total_time_in_queue()} mins\nAverage length of Queue: {self.get_average_length_of_queue()}"
+
+    def get_average_length_of_queue(self):
+        return self.total_customer_count/self.total_time_passed
+
+    def get_total_customer_count(self):
+        return self.total_customer_count
+
+    def get_average_total_time_in_queue(self):
+        return self.max_size/self.total_time_passed
 
     def get_queue(self):
         return self.queue
@@ -227,7 +240,6 @@ def main():
 
     while (primary_queue.size() > 0):
         print("time:",simulated_minute)
-        print(prev)
 
         if simulated_minute != prev:
             # If repeat, time shouldnt run again
@@ -235,7 +247,7 @@ def main():
                 primary_queue.process_time()
                 secondary_queue.process_time()
 
-            print("process")
+            print("\nprocess time\n")
             servers.process_time(secondary_queue, simulated_minute)
             
 
@@ -244,22 +256,17 @@ def main():
         front_customer = primary_queue.front()
 
         if front_customer.get_arrival_time() == simulated_minute:
-            print("time hit",front_customer)
+            print("Customer is coming in!",front_customer)
             servers.process_customer_in_primary_queue(primary_queue, simulated_minute)
         else:
-            servers.get_server_status()
             simulated_minute += 1
 
     # Up to here is correct
-    servers.get_server_status()
     simulated_minute += 1
     
-    while (servers.are_there_still_customers_to_be_served()):
+    while (servers.are_there_still_customers_to_be_served(primary_queue, secondary_queue)):
         print("time:",simulated_minute)
-        print(prev)
 
-        primary_queue.process_time()
-        secondary_queue.process_time()
         servers.process_time(secondary_queue, simulated_minute)
 
         if (secondary_queue.size() > 0):
@@ -267,10 +274,21 @@ def main():
 
             servers.process_customer_in_secondary_queue(secondary_queue, simulated_minute)
         
-        servers.get_server_status()
         simulated_minute += 1
 
+    print("Final Status for each server:")
+    servers.get_server_status()
+    average_total_time_in_queue_overall = primary_queue.get_average_total_time_in_queue() + secondary_queue.get_average_total_time_in_queue()
+    average_length_in_queue_overall = primary_queue.get_average_length_of_queue() + secondary_queue.get_average_length_of_queue()
+
+    print("\nPrimary Queue")
     print(primary_queue)
+    print("\nSecondary Queue")
     print(secondary_queue)
+    print("\nOverall")
+    print(f"Average total service time: {servers.get_accumulated_service_requirement()/primary_queue.get_total_customer_count()} mins")
+    print(f"Average total time in all Queues: {average_total_time_in_queue_overall} mins")
+    print(f"Average length of all Queues: {average_length_in_queue_overall}")
+
     
 main()
