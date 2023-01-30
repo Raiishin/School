@@ -1,0 +1,81 @@
+SQL> SET ECHO ON
+SQL> SET FEEDBACK ON
+SQL> SET LINESIZE 100
+SQL> SET PAGESIZE 200
+SQL> SET SERVEROUTPUT ON
+SQL> 
+SQL> --Task 1b
+SQL> 
+SQL> --(i)
+SQL> create index A2Task1biIdx on partsupp(ps_suppkey, ps_partkey);
+
+Index created.
+
+SQL> 
+SQL> select ps_suppkey, ps_partkey from partsupp
+  2  where ps_suppkey = '1813'
+  3  and ps_partkey = '312';
+
+PS_SUPPKEY PS_PARTKEY                                                                               
+---------- ----------                                                                               
+      1813        312                                                                               
+
+1 row selected.
+
+SQL> 
+SQL> drop index A2Task1biIdx;
+
+Index dropped.
+
+SQL> 
+SQL> --(ii)
+SQL> select ps_suppkey, ps_partkey from partsupp
+  2  where ps_suppkey = '1813'
+  3  and ps_partkey = '312';
+
+PS_SUPPKEY PS_PARTKEY                                                                               
+---------- ----------                                                                               
+      1813        312                                                                               
+
+1 row selected.
+
+SQL> 
+SQL> --(iii)
+SQL> create index A2Task1biiiIdx on partsupp(ps_partkey);
+
+Index created.
+
+SQL> 
+SQL> select ps_suppkey, ps_partkey from partsupp
+  2  where ps_partkey = '312';
+
+PS_SUPPKEY PS_PARTKEY                                                                               
+---------- ----------                                                                               
+       313        312                                                                               
+      1063        312                                                                               
+      1813        312                                                                               
+      2563        312                                                                               
+
+4 rows selected.
+
+SQL> 
+SQL> drop index A2Task1biiiIdx;
+
+Index dropped.
+
+SQL> 
+SQL> --(iv)
+SQL> select ps_suppkey, ps_partkey from partsupp
+  2  where ps_partkey = '312';
+
+PS_SUPPKEY PS_PARTKEY                                                                               
+---------- ----------                                                                               
+       313        312                                                                               
+      1063        312                                                                               
+      1813        312                                                                               
+      2563        312                                                                               
+
+4 rows selected.
+
+SQL> 
+SQL> SPOOL OFF

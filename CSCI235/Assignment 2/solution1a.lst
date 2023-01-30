@@ -1,0 +1,58 @@
+SQL> SET ECHO ON
+SQL> SET FEEDBACK ON
+SQL> SET LINESIZE 100
+SQL> SET PAGESIZE 200
+SQL> SET SERVEROUTPUT ON
+SQL> 
+SQL> --SELECT P_BRAND, P_TYPE, P_RETAILPRICE FROM PART;
+SQL> 
+SQL> SELECT COUNT(*) FROM PART
+  2  WHERE P_BRAND = 'BRAND#18';
+
+  COUNT(*)                                                                                          
+----------                                                                                          
+         0                                                                                          
+
+1 row selected.
+
+SQL> 
+SQL> --CREATE INDEX id2 ON PART(P_BRAND);
+SQL> --DROP INDEX id2;
+SQL> 
+SQL> SELECT L_ORDERKEY, COUNT(*) FROM LINEITEM
+  2  WHERE L_ORDERKEY = 1184000
+  3  GROUP BY L_ORDERKEY;
+
+L_ORDERKEY   COUNT(*)                                                                               
+---------- ----------                                                                               
+   1184000          1                                                                               
+
+1 row selected.
+
+SQL> 
+SQL> --CREATE INDEX id3 ON LINEITEM(L_ORDERKEY);
+SQL> --DROP INDEX id3;
+SQL> 
+SQL> SELECT MAX(PS_SUPPKEY) FROM PARTSUPP;
+
+MAX(PS_SUPPKEY)                                                                                     
+---------------                                                                                     
+           3000                                                                                     
+
+1 row selected.
+
+SQL> 
+SQL> --CREATE INDEX id4 ON PARTSUPP(PS_SUPPKEY);
+SQL> --DROP INDEX id4;
+SQL> 
+SQL> SELECT PS_SUPPKEY, PS_PARTKEY, PS_SUPPLYCOST FROM PARTSUPP
+  2  WHERE PS_SUPPKEY = 3699
+  3  AND PS_PARTKEY = 700;
+
+no rows selected
+
+SQL> 
+SQL> --CREATE INDEX id5 ON PARTSUPP(PS_SUPPKEY, PS_PARTKEY);
+SQL> --DROP INDEX id5;
+SQL> 
+SQL> SPOOL OFF

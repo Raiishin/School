@@ -1,0 +1,222 @@
+MongoDB shell version v3.6.23
+connecting to: mongodb://127.0.0.1:27017/?gssapiServiceName=mongodb
+Implicit session: session { "id" : UUID("4fae6517-6b8c-49ce-8fd8-561895b0f390") }
+MongoDB server version: 3.6.23
+{ "Subjects" : 7 }
+{ "Total Subjects without prerequisistes" : 4 }
+{ "Total Subjects worth more than 3 credit points" : 1 }
+{
+	"subject" : {
+		"subTitle" : "Final Year Project",
+		"credit" : 6,
+		"type" : "Core"
+	}
+}
+{
+	"subject" : {
+		"subTitle" : "Algorithm and Data Structures",
+		"credit" : 3,
+		"type" : "Core"
+	}
+}
+{
+	"subject" : {
+		"subTitle" : "Algorithm and Problem Solving",
+		"credit" : 3,
+		"type" : "Core"
+	}
+}
+{
+	"subject" : {
+		"subTitle" : "Applied Programming",
+		"credit" : 3,
+		"type" : "Core"
+	}
+}
+{
+	"subject" : {
+		"subTitle" : "Database Systems",
+		"credit" : 3,
+		"type" : "Core"
+	}
+}
+{
+	"subject" : {
+		"subTitle" : "Procedural Programming",
+		"credit" : 3,
+		"type" : "Core"
+	}
+}
+{
+	"subject" : {
+		"subTitle" : "Professional Practice and Ethics",
+		"credit" : 3,
+		"type" : "Elective"
+	}
+}
+{ "_id" : "Elective", "count" : 1 }
+{ "_id" : "Core", "count" : 6 }
+{
+	"_id" : {
+		"Book ISBN" : "978-0-262-53305-8",
+		"Book Title" : "Introduction to Algorithms"
+	}
+}
+{
+	"_id" : {
+		"Book ISBN" : "0-07-246563-8",
+		"Book Title" : "Database Management Systems"
+	}
+}
+{
+	"_id" : {
+		"Book ISBN" : "13:978-0-13-231681-1",
+		"Book Title" : "Introduction to the Design and Analysis of Algorithms"
+	}
+}
+{
+	"_id" : {
+		"Book ISBN" : "10:1-4390-4023-0",
+		"Book Title" : "Data Structures Using C++"
+	}
+}
+{ "_id" : { "Book ISBN" : "13:978-0-13-231681-1" } }
+{
+	"_id" : {
+		"Book ISBN" : "13:978-1-133-52635-3",
+		"Book Title" : "C++ Programming - Program design including data structure"
+	}
+}
+{
+	"_id" : {
+		"Book ISBN" : "13:978-0-136-08620-8",
+		"Book Title" : "Fundamentals of Database Systems"
+	}
+}
+{
+	"_id" : {
+		"Book ISBN" : "13:978-0-273-75983-6",
+		"Book Title" : "Starting Out With C++: From Control Structures through Objects"
+	}
+}
+{
+	"_id" : {
+		"Book Title" : "Fundamentals of Database Systems",
+		"Author" : [
+			"Ramez Elmasri",
+			"Shamkant B Navathe"
+		],
+		"Types of Book" : "textbook"
+	}
+}
+{
+	"_id" : {
+		"Book Title" : "Database Management Systems",
+		"Author" : [
+			"Raghur Ramakrishnan",
+			"Johannes Gehrke"
+		],
+		"Types of Book" : "reference"
+	}
+}
+{
+	"_id" : {
+		"Book ISBN" : "0-07-246563-8",
+		"Book Title" : "Database Management Systems",
+		"Book Publisher" : "McGraw-Hill"
+	}
+}
+{
+	"_id" : {
+		"Book ISBN" : "13:978-0-136-08620-8",
+		"Book Title" : "Fundamentals of Database Systems",
+		"Book Publisher" : "Addison-Wesley"
+	}
+}
+{
+	"_id" : {
+		"Book ISBN" : "13:978-0-13-231681-1",
+		"Book Publisher" : "Pearson"
+	}
+}
+{
+	"subject" : {
+		"subCode" : "CSCI103",
+		"book" : [
+			{
+				"bookTitle" : "Introduction to the Design and Analysis of Algorithms",
+				"publisher" : "Pearson"
+			},
+			{
+				"publisher" : "Pearson"
+			}
+		]
+	}
+}
+{
+	"subject" : {
+		"subCode" : "CSCI114",
+		"book" : [
+			{
+				"bookTitle" : "C++ Programming - Program design including data structure",
+				"publisher" : "CENGAGE Learning"
+			},
+			{
+				"bookTitle" : "Starting Out With C++: From Control Structures through Objects",
+				"publisher" : "Addison-Wesley"
+			}
+		]
+	}
+}
+{
+	"subject" : {
+		"subCode" : "CSCI124",
+		"book" : [
+			{
+				"bookTitle" : "Data Structures Using C++",
+				"publisher" : "CENGAGE Learning"
+			},
+			{
+				"bookTitle" : "C++ Programming - Program design including data structure",
+				"publisher" : "CENGAGE Learning"
+			},
+			{
+				"bookTitle" : "Starting Out With C++: From Control Structures through Objects",
+				"publisher" : "Addison-Wesley"
+			}
+		]
+	}
+}
+{
+	"subject" : {
+		"subCode" : "CSCI203",
+		"book" : [
+			{
+				"bookTitle" : "Introduction to the Design and Analysis of Algorithms",
+				"publisher" : "Pearson"
+			},
+			{
+				"bookTitle" : "Introduction to Algorithms",
+				"publisher" : "The MIT Press"
+			}
+		]
+	}
+}
+{
+	"subject" : {
+		"subCode" : "CSCI235",
+		"book" : [
+			{
+				"bookTitle" : "Fundamentals of Database Systems",
+				"publisher" : "Addison-Wesley"
+			},
+			{
+				"bookTitle" : "Database Management Systems",
+				"publisher" : "McGraw-Hill"
+			}
+		]
+	}
+}
+{ "subject" : { "subCode" : "CSCI321" } }
+{ "subject" : { "subCode" : "IACT201" } }
+bye

@@ -1,0 +1,140 @@
+MongoDB shell version v3.6.23
+connecting to: mongodb://127.0.0.1:27017/?gssapiServiceName=mongodb
+Implicit session: session { "id" : UUID("b59e7139-da7e-4875-8692-41d46e90c3de") }
+MongoDB server version: 3.6.23
+BulkWriteResult({
+	"writeErrors" : [ ],
+	"writeConcernErrors" : [ ],
+	"nInserted" : 1,
+	"nUpserted" : 0,
+	"nMatched" : 0,
+	"nModified" : 0,
+	"nRemoved" : 0,
+	"upserted" : [ ]
+})
+> show dbs
+admin    0.000GB
+config   0.000GB
+jygt002  0.000GB
+local    0.000GB
+test     0.000GB
+> use 7573935
+switched to db 7573935
+> load("a3solution1.js")
+true
+> show collections
+jygt002
+> db.jygt002.find().pretty()
+{
+	"_id" : ObjectId("637f661bcd49ac8af59ee73c"),
+	"CUSTOMER" : [
+		{
+			"custID" : "c001",
+			"fName" : "gavin",
+			"lName" : "tan",
+			"accounts" : {
+				"acctNumber" : [
+					"a001",
+					"a002"
+				]
+			}
+		}
+	],
+	"ACCOUNT" : [
+		{
+			"accountNumber" : "a001",
+			"balance" : 1000,
+			"custID" : "c001",
+			"brchName" : "b001"
+		},
+		{
+			"accountNumber" : "a002",
+			"balance" : 2000,
+			"custID" : "c001",
+			"brchName" : "b001"
+		}
+	],
+	"BRANCH" : [
+		{
+			"brchName" : "b001",
+			"address" : {
+				"street" : "100 branch road",
+				"city" : "Singapore",
+				"Country" : "Singapore"
+			},
+			"employees" : {
+				"eNum" : [
+					"e001",
+					"e002"
+				]
+			}
+		}
+	],
+	"EMPLOYEE" : [
+		{
+			"eNum" : "e001",
+			"fullName" : "Mlon Eusk"
+		},
+		{
+			"eNum" : "e002",
+			"fullName" : "Parry Hotter"
+		}
+	]
+}
+{
+	"_id" : ObjectId("637f666242a78897f7013271"),
+	"CUSTOMER" : [
+		{
+			"custID" : "c001",
+			"fName" : "gavin",
+			"lName" : "tan",
+			"accounts" : {
+				"acctNumber" : [
+					"a001",
+					"a002"
+				]
+			}
+		}
+	],
+	"ACCOUNT" : [
+		{
+			"accountNumber" : "a001",
+			"balance" : 1000,
+			"custID" : "c001",
+			"brchName" : "b001"
+		},
+		{
+			"accountNumber" : "a002",
+			"balance" : 2000,
+			"custID" : "c001",
+			"brchName" : "b001"
+		}
+	],
+	"BRANCH" : [
+		{
+			"brchName" : "b001",
+			"address" : {
+				"street" : "100 branch road",
+				"city" : "Singapore",
+				"Country" : "Singapore"
+			},
+			"employees" : {
+				"eNum" : [
+					"e001",
+					"e002"
+				]
+			}
+		}
+	],
+	"EMPLOYEE" : [
+		{
+			"eNum" : "e001",
+			"fullName" : "Mlon Eusk"
+		},
+		{
+			"eNum" : "e002",
+			"fullName" : "Parry Hotter"
+		}
+	]
+}
+bye

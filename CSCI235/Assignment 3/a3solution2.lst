@@ -1,0 +1,183 @@
+MongoDB shell version v3.6.23
+connecting to: mongodb://127.0.0.1:27017/?gssapiServiceName=mongodb
+Implicit session: session { "id" : UUID("25e01982-69b5-46a0-a000-ed02949816b0") }
+MongoDB server version: 3.6.23
+Task 2 (i)
+{ "Employee" : { "fName" : "James", "lName" : "Bond" } }
+Task 2 (ii)
+{ "Employee" : { "fName" : "Harry", "lName" : "Potter" } }
+Task 2 (iii)
+{
+	"_id" : ObjectId("637f6805e3d669a60d02b268"),
+	"Employee" : {
+		"empeId" : "e002",
+		"fName" : "Harry",
+		"lName" : "Potter",
+		"experience" : [
+			"Data Warehouse",
+			"SQL",
+			"Spark Scala",
+			"Java Scripts"
+		]
+	},
+	"Project" : [
+		{
+			"projectId" : "p001",
+			"projectTitle" : "Install MongoDB"
+		},
+		{
+			"projectId" : "p002",
+			"projectTitle" : "Install Oracle"
+		},
+		{
+			"projectId" : "p003",
+			"projectTitle" : "Install Hadoop"
+		}
+	],
+	"EmployeeProject" : [
+		{
+			"empeId" : "e001",
+			"projectId" : "p001",
+			"hoursWorked" : 4
+		},
+		{
+			"empeId" : "e001",
+			"projectId" : "p003",
+			"hoursWorked" : 2
+		},
+		{
+			"empeId" : "e002",
+			"projectId" : "p003",
+			"hoursWorked" : 5
+		}
+	]
+}
+Task 2 (iv)
+WriteResult({ "nMatched" : 1, "nUpserted" : 0, "nModified" : 1 })
+{
+	"_id" : ObjectId("637f6805e3d669a60d02b268"),
+	"Employee" : [
+		{
+			"empeId" : "e001",
+			"fName" : "James",
+			"lName" : "Bond",
+			"email" : "jamesbond$hotmail.com",
+			"experience" : [
+				"Database Design",
+				"SQL",
+				"Java",
+				"HIVE",
+				"HIVE",
+				"HIVE",
+				"HIVE"
+			]
+		},
+		{
+			"empeId" : "e002",
+			"fName" : "Harry",
+			"lName" : "Potter",
+			"experience" : [
+				"Data Warehouse",
+				"SQL",
+				"Spark Scala",
+				"Java Scripts"
+			]
+		}
+	],
+	"Project" : [
+		{
+			"projectId" : "p001",
+			"projectTitle" : "Install MongoDB"
+		},
+		{
+			"projectId" : "p002",
+			"projectTitle" : "Install Oracle"
+		},
+		{
+			"projectId" : "p003",
+			"projectTitle" : "Install Hadoop"
+		}
+	],
+	"EmployeeProject" : [
+		{
+			"empeId" : "e001",
+			"projectId" : "p001",
+			"hoursWorked" : 4
+		},
+		{
+			"empeId" : "e001",
+			"projectId" : "p003",
+			"hoursWorked" : 2
+		},
+		{
+			"empeId" : "e002",
+			"projectId" : "p003",
+			"hoursWorked" : 5
+		}
+	]
+}
+Task 2 (v)
+WriteResult({ "nMatched" : 1, "nUpserted" : 0, "nModified" : 0 })
+{
+	"_id" : ObjectId("637f6805e3d669a60d02b268"),
+	"Employee" : [
+		{
+			"empeId" : "e001",
+			"fName" : "James",
+			"lName" : "Bond",
+			"email" : "jamesbond$hotmail.com",
+			"experience" : [
+				"Database Design",
+				"SQL",
+				"Java",
+				"HIVE",
+				"HIVE",
+				"HIVE",
+				"HIVE"
+			]
+		},
+		{
+			"empeId" : "e002",
+			"fName" : "Harry",
+			"lName" : "Potter",
+			"experience" : [
+				"Data Warehouse",
+				"SQL",
+				"Spark Scala",
+				"Java Scripts"
+			]
+		}
+	],
+	"Project" : [
+		{
+			"projectId" : "p001",
+			"projectTitle" : "Install MongoDB"
+		},
+		{
+			"projectId" : "p002",
+			"projectTitle" : "Install Oracle"
+		},
+		{
+			"projectId" : "p003",
+			"projectTitle" : "Install Hadoop"
+		}
+	],
+	"EmployeeProject" : [
+		{
+			"empeId" : "e001",
+			"projectId" : "p001",
+			"hoursWorked" : 4
+		},
+		{
+			"empeId" : "e001",
+			"projectId" : "p003",
+			"hoursWorked" : 2
+		},
+		{
+			"empeId" : "e002",
+			"projectId" : "p003",
+			"hoursWorked" : 5
+		}
+	]
+}
+bye

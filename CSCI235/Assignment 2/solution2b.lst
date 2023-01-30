@@ -1,0 +1,75 @@
+SQL> 
+SQL> create or replace function CheapestDearestPartSupplier(partNumber number)
+  2  return VARCHAR is
+  3  maxValue number;
+  4  minValue number;
+  5  maxSuppkey number;
+  6  maxsName varchar(25);
+  7  maxSuppCost number;
+  8  minSuppkey number;
+  9  minsName varchar(25);
+ 10  minSuppCost number;
+ 11  return_list varchar(300);
+ 12  
+ 13  begin
+ 14  
+ 15  return_list := '';
+ 16  
+ 17  	     select max(ps_supplycost) into maxValue
+ 18  	     from partsupp
+ 19  	     where ps_partkey = partNumber and ROWNUM <= 1;
+ 20  
+ 21  	     select min(ps_supplycost) into minValue
+ 22  	     from partsupp
+ 23  	     where ps_partkey = partNumber and ROWNUM <= 1;
+ 24  
+ 25  	     select ps_suppkey , s_name, ps_supplycost into maxSuppkey, maxsName, maxSuppCost from partsupp, supplier where ps_suppkey = s_suppkey and ps_supplycost = minValue and rownum <= 1;
+ 26  
+ 27  	     select ps_suppkey , s_name, ps_supplycost into minSuppkey, minsName, minSuppCost from partsupp, supplier where ps_suppkey = s_suppkey and ps_supplycost = maxValue and rownum <= 1;
+ 28  
+ 29  
+ 30  	     return_list := 'Supplier with cheapest cost ' || minSuppkey || ', ' || minsName || ', ' || minSuppCost || '
+ 31  '|| 'Supplier with dearest cost ' || maxSuppkey || ', ' || maxsName || ', ' || maxSuppCost;
+ 32  return return_list;
+ 33  end;
+ 34  /
+
+Function created.
+
+SQL> show error
+No errors.
+SQL> 
+SQL> set serveroutput on
+SQL> set echo on
+SQL> set feedback on
+SQL> 
+SQL> select CheapestDearestPartSupplier(p_partkey) from part where p_partkey in ('3753', '43064', '57574', '60000');
+
+CHEAPESTDEARESTPARTSUPPLIER(P_PARTKEY)            
+--------------------------------------------------
+Supplier with cheapest cost 7, Supplier#000000007 
+      , 403.67                                    
+Supplier with dearest cost 7, Supplier#000000007  
+     , 403.67                                     
+                                                  
+Supplier with cheapest cost 357, Supplier#00000035
+7       , 848.13                                  
+Supplier with dearest cost 357, Supplier#000000357
+       , 848.13                                   
+                                                  
+Supplier with cheapest cost 575, Supplier#00000057
+5       , 588.99                                  
+Supplier with dearest cost 575, Supplier#000000575
+       , 588.99                                   
+                                                  
+Supplier with cheapest cost 1, Supplier#000000001 
+      , 692.11                                    
+Supplier with dearest cost 1, Supplier#000000001  
+     , 692.11                                     
+                                                  
+
+4 rows selected.
+
+SQL> 
+SQL> 
+SQL> spool off
